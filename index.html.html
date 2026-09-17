@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<!-- OSADE v4 -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSADE — Архитектура и Дизайн Гостеприимства</title>
+<meta name="description" content="OSADE — архитектура и дизайн гостеприимства: отели, гостевые дома, загородные комплексы">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0c10'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c8a878' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#0e0c10;--bg2:#141018;--ink:#efe9df;--muted:#b3a996;--gold:#c8a878;
+--line:rgba(240,230,215,.16);
+--serif:'Playfair Display',Georgia,'Times New Roman',serif;
+--body:'EB Garamond',Georgia,serif;
+--sans:'Jost',Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--sans);cursor:pointer;background:none;border:none;color:inherit}
+::selection{background:var(--gold);color:#151009}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.container.narrow{max-width:880px}
+.container.narrow2{max-width:760px}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 4vw;transition:.35s}
+header.solid{background:rgba(13,11,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 4vw}
+.logo{font-family:var(--serif);font-size:25px;letter-spacing:6px;font-weight:600}
+nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+nav a{font-family:var(--serif);font-size:16px;letter-spacing:.05em;opacity:.92;position:relative;padding:6px 0;white-space:nowrap}
+nav a:hover{color:var(--gold)}
+nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold)}
+.caret{font-size:11px;opacity:.7;margin-left:3px}
+.drop{position:relative}
+.drop-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(18,14,23,.97);border:1px solid var(--line);min-width:200px;padding:8px 0;display:none;flex-direction:column;backdrop-filter:blur(8px)}
+.drop:hover .drop-menu{display:flex}
+.drop-menu a{display:block;padding:9px 22px;font-size:15px}
+.right{display:flex;align-items:center;gap:16px}
+
+/* ---------- СОЦСЕТИ: крупные контрастные кнопки ---------- */
+.soc{display:flex;gap:12px;align-items:center}
+.soc a{width:32px;height:32px;background:#fff;color:#0b0910;border-radius:50%;display:grid;place-items:center;box-shadow:0 3px 14px rgba(0,0,0,.55);transition:.25s}
+.soc a:hover{background:#111;color:#fff;transform:translateY(-2px)}
+.soc a.off{opacity:.4}
+.soc svg{width:27px;height:27px;fill:currentColor}
+
+.burger{display:none;width:38px;height:34px;position:relative;z-index:70}
+.burger span{position:absolute;left:7px;right:7px;height:1.5px;background:var(--ink);transition:.3s}
+.burger span:nth-child(1){top:10px}.burger span:nth-child(2){top:16.5px}.burger span:nth-child(3){top:23px}
+.burger.open span:nth-child(1){top:16.5px;transform:rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){top:16.5px;transform:rotate(-45deg)}
+.mnav{position:fixed;inset:0;background:rgba(10,8,13,.98);z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:.3s}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav a{font-family:var(--serif);font-size:26px}
+.mnav a:hover{color:var(--gold)}
+.mnav .soc{margin-top:16px}
+
+/* ---------- hero / home ---------- */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative;background-size:cover;background-position:center}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,13,.62),rgba(10,8,13,.30) 42%,rgba(10,8,13,.74))}
+.hero-inner{position:relative;padding:130px 24px 90px;max-width:1150px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(32px,5.4vw,72px);line-height:1.12;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.hero-sub{margin-top:24px;font-family:var(--serif);font-size:clamp(16px,2.2vw,27px);letter-spacing:.13em;opacity:.96;text-shadow:0 1px 18px rgba(0,0,0,.5)}
+.hero-sub .star{color:var(--gold);font-style:normal;margin:0 13px;font-size:.75em;vertical-align:middle}
+@keyframes cue{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+.cue{position:absolute;bottom:22px;left:50%;color:var(--gold);font-size:30px;animation:cue 2.3s infinite;font-family:var(--serif)}
+.intro-sec{text-align:center;padding:100px 0 90px}
+.intro-text{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.3vw,27px);line-height:1.6;max-width:820px;margin:0 auto 36px;color:#e9e1d3}
+.section{padding:80px 0}
+.overline{font-family:var(--sans);font-weight:400;letter-spacing:.35em;text-transform:uppercase;font-size:11.5px;color:var(--gold);margin-bottom:14px}
+.sec-title{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,42px);line-height:1.22}
+.lead{color:var(--muted);max-width:720px;margin-top:14px;font-size:18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:36px;margin-top:44px}
+.card figure{overflow:hidden;aspect-ratio:4/3;background:#1a1620;margin:0}
+.card figure.fig-blog{aspect-ratio:16/10}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.6,.2,1)}
+.card:hover img{transform:scale(1.06)}
+.card h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-top:16px;transition:color .3s;line-height:1.35}
+.card:hover h3{color:var(--gold)}
+.card p{color:var(--muted);font-size:15.5px;margin-top:5px}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--ink);padding:14px 34px;font-family:var(--sans);font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:.3s}
+.btn:hover{background:var(--gold);color:#171106}
+.btn.small{padding:10px 22px;font-size:11px}
+.btn.ghost{border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--gold)}
+.post-date{font-family:var(--sans);font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
+
+/* ---------- inner pages ---------- */
+.page{padding:150px 0 90px;min-height:60vh}
+.crumb{display:inline-block;margin-bottom:24px;color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.08em}
+.crumb:hover{color:var(--gold)}
+.det-fig{position:relative;margin-top:34px}
+.det-fig img{width:100%;max-height:74vh;object-fit:cover;cursor:zoom-in}
+.det-count{position:absolute;right:14px;bottom:14px;background:rgba(10,8,13,.72);border:1px solid var(--line);padding:4px 12px;font-family:var(--sans);font-size:12px;letter-spacing:.15em}
+.thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:6px}
+.thumbs img{width:110px;aspect-ratio:4/3;object-fit:cover;opacity:.5;cursor:pointer;border:1px solid transparent;flex:none;transition:.25s}
+.thumbs img:hover{opacity:.85}
+.thumbs img.on{opacity:1;border-color:var(--gold)}
+.det-hint{color:#8f8676;font-size:13px;font-family:var(--sans);margin-top:14px}
+.others{margin-top:80px}
+.step{display:grid;grid-template-columns:1.05fr .95fr;gap:6%;align-items:center;padding:52px 0;border-top:1px solid var(--line)}
+.step.rev .step-txt{order:2}.step.rev .step-img{order:1}
+.step .num{font-family:var(--serif);font-size:52px;color:transparent;-webkit-text-stroke:1px var(--gold);line-height:1}
+.step h3{font-family:var(--serif);font-weight:500;font-size:26px;margin:14px 0 10px}
+.step p{color:#d9d0c0}
+.step-img{overflow:hidden}
+.step-img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:7%;align-items:start;margin-top:44px}
+.about figure{aspect-ratio:4/5;overflow:hidden;margin:0}
+.about img{width:100%;height:100%;object-fit:cover}
+.prose p{margin:0 0 18px;font-size:18.5px;color:#e8e0d2}
+.c-lines{margin-top:36px}
+.c-line{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:19px}
+.c-line::before{content:'—';color:var(--gold)}
+.soc-big{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.soc-btn{display:inline-flex;gap:10px;align-items:center}
+.soc-btn svg{width:20px;height:20px;fill:currentColor}
+.video{position:relative;padding-top:56.25%;margin:28px 0}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.post-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:26px 0}
+.post-imgs img{aspect-ratio:4/3;object-fit:cover;width:100%;cursor:zoom-in}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:46px 4vw 30px;text-align:center;margin-top:40px}
+.f-logo{font-family:var(--serif);letter-spacing:6px;font-size:20px;margin-bottom:16px}
+.f-nav{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-bottom:18px;font-family:var(--serif);font-size:15px}
+.f-nav a:hover{color:var(--gold)}
+footer .soc{justify-content:center;margin-bottom:18px}
+.f-copy{color:#7d7466;font-size:13px;font-family:var(--sans);letter-spacing:.05em}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;background:rgba(8,6,10,.95);z-index:100;display:flex;align-items:center;justify-content:center}
+.lb img{max-width:88vw;max-height:86vh;object-fit:contain}
+.lb-x{position:absolute;top:16px;right:24px;font-size:26px;color:#fff}
+.lb-a{position:absolute;top:50%;transform:translateY(-50%);font-size:46px;color:#fff;padding:22px;font-family:var(--serif)}
+.lb-a.l{left:6px}.lb-a.r{right:6px}
+.lb-c{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--sans);letter-spacing:.2em;color:var(--muted);font-size:13px}
+
+/* ---------- admin ---------- */
+.admin-wrap{display:grid;grid-template-columns:230px 1fr;gap:40px;padding:140px 4vw 90px;max-width:1280px;margin:0 auto}
+.admin-nav{position:sticky;top:100px;align-self:start;display:flex;flex-direction:column;gap:4px}
+.admin-nav button{text-align:left;padding:10px 14px;border-left:1px solid var(--line);color:var(--muted);font-size:14.5px;letter-spacing:.04em;font-family:var(--serif)}
+.admin-nav button:hover{color:var(--ink)}
+.admin-nav button.on{color:var(--gold);border-color:var(--gold)}
+.adm-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.inp{width:100%;background:#171219;border:1px solid var(--line);color:var(--ink);padding:10px 12px;font-family:var(--sans);font-size:14px;border-radius:2px}
+.inp:focus{border-color:var(--gold);outline:none}
+textarea.inp{font-family:var(--body);font-size:16px;line-height:1.5;resize:vertical}
+textarea.inp:focus{outline:none;border-color:var(--gold)}
+.mini-btn{border:1px solid var(--line);padding:8px 14px;font-size:12px;letter-spacing:.08em;color:var(--ink);display:inline-block;transition:.2s}
+.mini-btn:hover{border-color:var(--gold);color:var(--gold)}
+.mini-btn.on{border-color:var(--gold);color:var(--gold)}
+.mini-btn.danger{color:#d98a7e;border-color:rgba(217,138,126,.4)}
+.mini-btn.add{border-color:var(--gold);color:var(--gold)}
+.item-card{border:1px solid var(--line);padding:20px;margin-bottom:22px;background:#120e16}
+.thumb{width:84px;height:64px;object-fit:cover;flex:none;border:1px solid var(--line)}
+.g-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;align-items:flex-start}
+.g-item{width:96px}
+.g-item img{width:96px;height:72px;object-fit:cover;cursor:zoom-in}
+.g-ctl{display:flex;gap:4px;margin-top:4px}
+.g-ctl button{flex:1;border:1px solid var(--line);font-size:11px;padding:3px 0;color:var(--muted)}
+.g-ctl button:hover{color:var(--gold);border-color:var(--gold)}
+.hint{color:#8f8676;font-size:13.5px;font-family:var(--sans);margin:6px 0 14px;line-height:1.55}
+.f-row{display:flex;gap:12px;align-items:center}
+.f-col{display:flex;flex-direction:column;gap:8px}
+.grow{flex:1}
+.f-label{font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.v-btns{display:flex;flex-direction:column;gap:4px}
+.v-btns button{width:32px;height:27px;border:1px solid var(--line);color:var(--muted);font-size:12px}
+.v-btns button:hover{color:var(--gold);border-color:var(--gold)}
+.v-btns button.danger{color:#d98a7e}
+.sub-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.pub-steps{margin:10px 0 4px 20px;line-height:1.9}
+.pub-steps li{margin-bottom:4px}
+.soc-ic{width:40px;display:grid;place-items:center;color:var(--gold)}
+.soc-ic svg{width:20px;height:20px;fill:currentColor}
+.ver-tag{font-family:var(--sans);font-size:12px;letter-spacing:.1em;border:1px solid var(--gold);color:var(--gold);padding:4px 10px}
+
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1d1724;border:1px solid var(--gold);color:var(--ink);padding:12px 22px;font-family:var(--sans);font-size:13px;letter-spacing:.05em;opacity:0;pointer-events:none;transition:.35s;z-index:120;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+
+@media(max-width:1020px){
+#navList{display:none}
+.burger{display:block}
+header .right .soc{display:none}
+.admin-wrap{grid-template-columns:1fr;gap:18px}
+.admin-nav{position:static;flex-direction:row;overflow-x:auto;border-bottom:1px solid var(--line);padding-bottom:8px}
+.admin-nav button{border-left:none;border-bottom:2px solid transparent;white-space:nowrap}
+.admin-nav button.on{border-color:var(--gold)}
+}
+@media(max-width:760px){
+.about{grid-template-columns:1fr}
+.step{grid-template-columns:1fr;gap:20px}
+.step.rev .step-txt{order:1}.step.rev .step-img{order:2}
+.page{padding-top:120px}
+}
+</style>
+
+</head>
+<body>
+
+<header id="hdr">
+<a class="logo" href="#/"><span id="logoText">OSADE</span></a>
+<nav><ul id="navList"></ul></nav>
+<div class="right">
+<div class="soc" id="socHdr"></div>
+<button class="burger" id="burger" aria-label="Меню" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div>
+</header>
+<div class="mnav" id="mnav"><div id="mnavList" style="display:flex;flex-direction:column;gap:22px;align-items:center"></div><div class="soc" id="mnavSoc"></div></div>
+
+<main id="app"></main>
+<footer id="ftr"></footer>
+<div id="modalRoot"></div>
+<div id="toast"></div>
+
+<script>
+/* ================== ДЕМО-КОНТЕНТ (всё меняется через Админ) ================== */
+const pic=(s,w=1200,h=900)=>`https://picsum.photos/seed/${s}/${w}/${h}`;
+const DEFAULTS={
+meta:{updatedAt:0},
+site:{
+logoText:'OSADE',
+heroTitle:'Архитектура и Дизайн Гостеприимства',
+heroSub:'отели * гостевые дома * загородные комплексы',
+heroImg:pic('osade-manor',1920,1080),
+intro:'Я соединяю классическую архитектуру, современный дизайн и знание энергетики места — чтобы отели и дома не просто выглядели, а чувствовались гармоничными.',
+featuredHeading:'Избранные проекты',
+footer:'OSADE · архитектура и дизайн гостеприимства'
+},
+socials:[
+{icon:'max',name:'MAX',url:''},
+{icon:'vk', name:'ВКонтакте',url:''},
+{icon:'tg', name:'Telegram',url:''},
+{icon:'pin',name:'Pinterest',url:''}
+],
+about:{heading:'Обо мне',
+photo:pic('osade-portrait',900,1100),
+text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
+projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
+items:[
+{id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',cover:pic('osade-p1-cover',1200,900),
+gallery:[pic('osade-p1-1',1600,1000),pic('osade-p1-2',1600,1000),pic('osade-p1-3',1600,1000),pic('osade-p1-4',1600,1000),pic('osade-p1-5',1600,1000)]},
+{id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',cover:pic('osade-p2-cover',1200,900),
+gallery:[pic('osade-p2-1',1600,1000),pic('osade-p2-2',1600,1000),pic('osade-p2-3',1600,1000),pic('osade-p2-4',1600,1000)]},
+{id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',cover:pic('osade-p3-cover',1200,900),
+gallery:[pic('osade-p3-1',1600,1000),pic('osade-p3-2',1600,1000),pic('osade-p3-3',1600,1000),pic('osade-p3-4',1600,1000),pic('osade-p3-5',1600,1000),pic('osade-p3-6',1600,1000)]}
+]},
+concepts:{heading:'Концепции', lead:'Идеи и образы, которые ждут своего места — возможно, вашего.',
+items:[
+{id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',cover:pic('osade-c1-cover',1200,900),
+gallery:[pic('osade-c1-1',1600,1000),pic('osade-c1-2',1600,1000),pic('osade-c1-3',1600,1000)]},
+{id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',cover:pic('osade-c2-cover',1200,900),
+gallery:[pic('osade-c2-1',1600,1000),pic('osade-c2-2',1600,1000),pic('osade-c2-3',1600,1000)]}
+]},
+stages:{heading:'Этапы работы', lead:'Путь от первой встречи до передачи ключей — спокойно, прозрачно, по шагам. Каждый текст и фото заменяются в разделе «Админ».',
+steps:[
+{title:'Знакомство и бриф', text:'Встречаемся онлайн или лично. Обсуждаем задачу, участок или здание, бюджет и сроки. Я слушаю — много.', img:pic('osade-st1',1200,900)},
+{title:'Энергетика места', text:'Приезжаю на объект, сижу в тишине, смотрю свет, воду, ветер и историю места. Так рождается образ будущего гостеприимства.', img:pic('osade-st2',1200,900)},
+{title:'Концепция и планировки', text:'Готовлю эскизную идею, зонирование, стилевые коллажи. Мы вместе выбираем направление.', img:pic('osade-st3',1200,900)},
+{title:'Проект и документация', text:'Развиваю концепцию до рабочих чертежей: планировки, ведомости отделки, подбор материалов и света.', img:pic('osade-st4',1200,900)},
+{title:'Реализация и надзор', text:'Сопровождаю стройку и отделку, защищаю детали, наполняю пространство предметами и смыслами. Передаю ключи.', img:pic('osade-st5',1200,900)}
+]},
+blog:{heading:'Блог', lead:'Дневник практики: наблюдения, приёмы, философия пространства.',
+items:[
+{id:'b1',date:'2025-06-02',title:'Почему я начинаю каждый проект с тишины',cover:pic('osade-b1',1200,750),
+text:'Прежде чем взять в руку карандаш, я приезжаю на место и просто сижу.\n\nПолчаса без телефона. Слушаю, как звучит участок утром и вечером, откуда приходит свет, куда тянутся тропинки. Место всегда говорит — вопрос, научимся ли мы слышать.\n\nЭта практика родилась из моего увлечения эзотерикой, но работает вполне прагматично: решения, принятые «от места», почти не спорят с контекстом. Гости потом не могут объяснить, почему в отеле так спокойно.\n\nПопробуйте и вы: не спрашивайте участок, каков он. Спросите, каким он хочет быть.',
+images:[pic('osade-b1-1',1200,900),pic('osade-b1-2',1200,900)],video:''},
+{id:'b2',date:'2025-07-14',title:'Пять приёмов, которые добавляют света гостевому дому',cover:pic('osade-b2',1200,750),
+text:'Свет — главный бесплатный материал в дизайне гостеприимства.\n\n1. Низкие тёплые светильники у кровати — гость чувствует себя дома.\n2. Контровой свет за растениями во дворе — силуэты вечером.\n3. Зеркало напротив окна в узком коридоре.\n4. Свечи на ресепшене — один жест, а атмосфера другая.\n5. Никакого холодного света в номерах. Никогда.',
+images:[pic('osade-b2-1',1200,900)],video:''}
+]},
+contacts:{heading:'Контакты', intro:'Заполните этот блок под себя в разделе «Админ → Контакты»: как и где с вами встретиться.',
+lines:['Работаю по России и за её пределами','Telegram / WhatsApp: +7 900 000-00-00','E-mail: hello@osade.ru','Встречи: онлайн или лично, по договорённости']}
+};
+
+/* ================== УТИЛИТЫ ================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const isObj=x=>x&&typeof x==='object'&&!Array.isArray(x);
+function mergeDeep(b,o){for(const k in o){if(isObj(o[k])&&isObj(b[k]))mergeDeep(b[k],o[k]);else b[k]=o[k];}return b;}
+function setPath(o,p,v){const ks=p.split('.');let t=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];t=isNaN(k)?t[k]:t[+k];}const l=ks[ks.length-1];if(isNaN(l))t[l]=v;else t[+l]=v;}
+const paras=t=>String(t||'').split(/\n{2,}/).filter(p=>p.trim()).map(p=>'<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>').join('');
+function fmtDate(d){try{return new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})}catch(e){return esc(d)}}
+function subHtml(s){return esc(s).split('*').map(x=>x.trim()).filter(Boolean).map(x=>'<span>'+x+'</span>').join('<i class="star">✳</i>')}
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
+function fileToDataURL(file,maxDim=1600,q=.82){return new Promise(res=>{const fr=new FileReader();fr.onload=()=>{const img=new Image();img.onload=()=>{const sc=Math.min(1,maxDim/Math.max(img.width,img.height));const cv=document.createElement('canvas');cv.width=Math.round(img.width*sc);cv.height=Math.round(img.height*sc);const cx=cv.getContext('2d');cx.fillStyle='#111';cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(img,0,0,cv.width,cv.height);res(cv.toDataURL('image/jpeg',q));};img.src=fr.result;};fr.readAsDataURL(file);});}
+
+/* ================== ИКОНКИ ================== */
+const ICON={
+max:'<svg viewBox="0 0 24 24"><path d="M5 19V5h2.9l4.1 6.4L16.1 5H19v14h-2.8v-8.7L12.4 15h-.9L7.8 10.3V19z"/></svg>',
+vk:'<svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.15 14.27h-1.46c-.55 0-.72-.44-1.71-1.44-.86-.83-1.24-.94-1.45-.94-.3 0-.38.08-.38.5v1.32c0 .35-.11.56-1.04.56-1.53 0-3.23-.93-4.42-2.66C5.96 12.1 5.47 10.21 5.47 9.83c0-.21.08-.41.5-.41h1.46c.37 0 .51.17.66.57.72 2.09 1.93 3.92 2.43 3.92.19 0 .27-.09.27-.56V9.83c-.06-1-.58-1.08-.58-1.44 0-.17.14-.33.36-.33h2.29c.31 0 .42.17.42.53v3.6c0 .39.17.53.28.53.19 0 .35-.14.7-.49 1.08-1.21 1.85-3.07 1.85-3.07.1-.21.27-.41.64-.41h1.46c.44 0 .53.23.44.53-.18.85-1.97 3.37-1.97 3.37-.15.25-.21.36 0 .64.15.21.66.64 1 1.04.62.71 1.1 1.3 1.23 1.71.11.42-.1.63-.52.63z"/></svg>',
+tg:'<svg viewBox="0 0 24 24"><path d="M21.9 4.6c.27-1.26-.46-1.76-1.47-1.34L2.9 9.87c-1.28.51-1.26 1.22-.22 1.54l4.5 1.4 10.43-6.58c.49-.32.94-.14.57.19l-8.44 7.63-.32 4.64c.46 0 .67-.2.93-.45l2.24-2.17 4.65 3.44c.86.47 1.47.23 1.68-.79l3.05-14.32z"/></svg>',
+wa:'<svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/></svg>',
+pin:'<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.64 7.86 6.36 9.31-.09-.79-.17-2.01.03-2.87.19-.78 1.2-5.09 1.2-5.09s-.31-.61-.31-1.52c0-1.42.83-2.48 1.85-2.48.87 0 1.3.66 1.3 1.44 0 .88-.56 2.19-.85 3.4-.24 1.02.51 1.85 1.52 1.85 1.82 0 3.22-1.92 3.22-4.69 0-2.45-1.76-4.17-4.28-4.17-2.91 0-4.62 2.19-4.62 4.45 0 .88.34 1.83.76 2.34.08.1.09.19.07.29-.08.32-.25 1.02-.28 1.16-.04.19-.15.23-.34.14-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.29-6.06 6.62-6.06 3.47 0 6.17 2.47 6.17 5.78 0 3.45-2.18 6.23-5.2 6.23-1.02 0-1.97-.53-2.3-1.15l-.62 2.38c-.23.87-.84 1.96-1.25 2.63.94.29 1.94.45 2.97.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>',
+ok:'<svg viewBox="0 0 24 24"><path d="M12 2.5a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 2.4a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4zM6.2 13.4c.5-.6 1.4-.7 2-.2 1 .8 2.3 1.3 3.8 1.3s2.8-.5 3.8-1.3c.6-.5 1.5-.4 2 .2s.4 1.5-.2 2c-1 .8-2.2 1.4-3.5 1.7l3 3c.5.5.5 1.4 0 1.9s-1.4.5-1.9 0l-3.2-3.2-3.2 3.2c-.5.5-1.4.5-1.9 0s-.5-1.4 0-1.9l3-3c-1.3-.3-2.5-.9-3.5-1.7-.6-.5-.7-1.4-.2-2z"/></svg>',
+phone:'<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.21c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>',
+mail:'<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>'
+};
+const SOC_LIST=['max','vk','tg','wa','pin','ok','phone','mail'];
+const SOC_NAMES={max:'MAX',vk:'ВКонтакте',tg:'Telegram',wa:'WhatsApp',pin:'Pinterest',ok:'Одноклассники',phone:'Телефон',mail:'E-mail'};
+const URL_HINT={max:'https://max.ru/u/код',vk:'https://vk.com/ваш_id',tg:'https://t.me/ваш_ник',wa:'https://wa.me/79001234567',pin:'https://ru.pinterest.com/профиль',ok:'https://ok.ru/профиль',phone:'tel:+79001234567',mail:'mailto:mail@yandex.ru'};
+
+/* ================== КОНТЕНТ: ЗАГРУЗКА / СОХРАНЕНИЕ ================== */
+const LS_KEY='osade_content_v1', LS_PWD='osade_pwd_v2', PWD_DEFAULT='osade2026';
+let C=null;
+async function loadContent(){
+let published=null;
+try{const r=await fetch('content.json',{cache:'no-store'});if(r.ok){const j=JSON.parse(await r.text());if(j&&j.site)published=j;}}catch(e){}
+let local=null;try{const ls=JSON.parse(localStorage.getItem(LS_KEY));if(ls&&ls.site)local=ls;}catch(e){}
+let pick=null;
+if(published&&local)pick=((local.meta&&local.meta.updatedAt)||0)>=(published.meta&&published.meta.updatedAt||0)?local:published;
+else pick=local||published;
+C=pick?mergeDeep(structuredClone(DEFAULTS),pick):structuredClone(DEFAULTS);
+}
+/* перенос старого набора кнопок (ВК, Pinterest, WhatsApp, Telegram) на новый (MAX, ВК, Telegram, Pinterest) с сохранением ссылок */
+function migrateSocials(){
+const oldSig=['vk','pin','wa','tg'].join();
+if(C.socials&&C.socials.map(s=>s.icon).join()===oldSig){
+const by={};C.socials.forEach(s=>by[s.icon]=s.url);
+C.socials=[['max','MAX'],['vk','ВКонтакте'],['tg','Telegram'],['pin','Pinterest']]
+.map(([ic,nm])=>({icon:ic,name:nm,url:by[ic]||''}));
+doSave();
+}
+}
+let saveT;
+function scheduleSave(){clearTimeout(saveT);saveT=setTimeout(doSave,400);}
+function doSave(){
+C.meta=C.meta||{};C.meta.updatedAt=Date.now();
+try{localStorage.setItem(LS_KEY,JSON.stringify(C));}catch(e){toast('Память браузера переполнена — используйте фото по ссылкам');}
+const s=$('#saveState');if(s){s.textContent='Сохранено ✓';setTimeout(()=>{if(s.textContent==='Сохранено ✓')s.textContent='';},1600);}
+}
+function upd(path,v){setPath(C,path,v);scheduleSave();if(path==='site.logoText')$('#logoText').textContent=v;}
+function uploadTo(path,inp){const f=inp.files[0];if(!f)return;toast('Обрабатываю фото…');fileToDataURL(f).then(u=>{setPath(C,path,u);doSave();admTab(adminTab);});}
+
+/* ================== ШАПКА / ПОДВАЛ ================== */
+const NAV=[
+{t:'Обо мне',h:'#/about',k:'about'},
+{t:'Портфолио',h:'#/projects',k:'portfolio',drop:[{t:'Проекты',h:'#/projects'},{t:'Концепции',h:'#/concepts'}]},
+{t:'Этапы',h:'#/stages',k:'stages'},
+{t:'Блог',h:'#/blog',k:'blog'},
+{t:'Контакты',h:'#/contacts',k:'contacts'},
+{t:'Админ',h:'#/admin',k:'admin'}
+];
+function socialLinks(){return C.socials.map(s=>{const u=(s.url||'').trim();
+return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} title="${esc(s.name)}" class="${u?'':'off'}">${ICON[s.icon]||''}</a>`;}).join('');}
+function renderChrome(){
+$('#logoText').textContent=C.site.logoText;
+$('#socHdr').innerHTML=socialLinks();
+$('#navList').innerHTML=NAV.map(n=>n.drop
+?`<li class="drop"><a href="${n.h}" data-k="${n.k}">${n.t} <span class="caret">▾</span></a><div class="drop-menu">${n.drop.map(d=>`<a href="${d.h}">${d.t}</a>`).join('')}</div></li>`
+:`<li><a href="${n.h}" data-k="${n.k}">${n.t}</a></li>`).join('');
+$('#mnavList').innerHTML=[['#/','Главная'],['#/about','Обо мне'],['#/projects','Проекты'],['#/concepts','Концепции'],['#/stages','Этапы'],['#/blog','Блог'],['#/contacts','Контакты'],['#/admin','Админ']]
+.map(x=>`<a href="${x[0]}" onclick="closeMobile()">${x[1]}</a>`).join('');
+$('#mnavSoc').innerHTML=socialLinks();
+$('#ftr').innerHTML=`<div class="f-logo">${esc(C.site.logoText)}</div>
+<div class="f-nav">${NAV.filter(n=>n.k!=='admin').map(n=>`<a href="${n.h}">${n.t}</a>`).join('')}</div>
+<div class="soc">${socialLinks()}</div>
+<div class="f-copy">© ${new Date().getFullYear()} ${esc(C.site.footer)}</div>`;
+}
+function setNavActive(key){document.querySelectorAll('#navList a[data-k]').forEach(a=>a.classList.toggle('active',a.dataset.k===key));}
+function toggleMenu(){$('#burger').classList.toggle('open');$('#mnav').classList.toggle('open');document.body.style.overflow=$('#mnav').classList.contains('open')?'hidden':'';}
+function closeMobile(){const m=$('#mnav');if(m.classList.contains('open')){m.classList.remove('open');$('#burger').classList.remove('open');document.body.style.overflow='';}}
+addEventListener('scroll',()=>{$('#hdr').classList.toggle('solid',scrollY>30);});
+
+/* ================== СТРАНИЦЫ ================== */
+const app=()=>$('#app');
+function cardProject(p,kind){return `<a class="card" href="#/${kind}/${p.id}"><figure><img loading="lazy" src="${esc(p.cover)}" alt="${esc(p.title)}"></figure><h3>${esc(p.title)}</h3><p>${esc(p.short)}</p></a>`;}
+function cardPost(p){return `<a class="card" href="#/post/${p.id}"><figure class="fig-blog"><img loading="lazy" src="${esc(p.cover)}" alt="${esc(p.title)}"></figure><div class="post-date" style="margin-top:14px">${fmtDate(p.date)}</div><h3>${esc(p.title)}</h3></a>`;}
+
+function viewHome(){const s=C.site;return `
+<section class="hero" style="background-image:url('${esc(s.heroImg)}')">
+<div class="hero-inner">
+<h1>${esc(s.heroTitle)}</h1>
+<div class="hero-sub">${subHtml(s.heroSub)}</div>
+</div>
+<button class="cue" onclick="window.scrollBy({top:Math.floor(innerHeight*.85),behavior:'smooth'})" aria-label="Вниз">⌄</button>
+</section>
+<section class="intro-sec"><div class="container">
+<p class="intro-text">${esc(s.intro)}</p>
+<a class="btn" href="#/contacts">Обсудить проект</a>
+</div></section>
+<section class="section" style="padding-top:20px"><div class="container">
+<div class="overline">Портфолио</div>
+<h2 class="sec-title">${esc(s.featuredHeading)}</h2>
+<div class="cards">${C.projects.items.slice(0,3).map(p=>cardProject(p,'project')).join('')}</div>
+<div style="margin-top:44px;display:flex;gap:14px;flex-wrap:wrap">
+<a class="btn" href="#/projects">Все проекты</a>
+<a class="btn ghost" href="#/concepts">Концепции</a>
+</div>
+</div></section>`;}
+
+function viewList(kind){const g=C[kind];const route=kind==='projects'?'project':'concept';return `
+<section class="page"><div class="container">
+<div class="overline">Портфолио</div>
+<h1 class="sec-title">${esc(g.heading)}</h1>
+<p class="lead">${esc(g.lead)}</p>
+<div class="cards">${g.items.map(p=>cardProject(p,route)).join('')}</div>
+</div></section>`;}
+
+let curGal=[],curIdx=0;
+function viewDetail(kind,id){
+const list=kind==='project'?C.projects:C.concepts;
+const arr=list.items;
+let idx=arr.findIndex(x=>x.id===id);if(idx<0)idx=0;
+const it=arr[idx];if(!it)return viewList(kind==='project'?'projects':'concepts');
+const gal=[it.cover].concat(it.gallery||[]);curGal=gal;curIdx=0;
+const back=kind==='project'?['#/projects','Все проекты']:['#/concepts','Все концепции'];
+const others=arr.filter(x=>x.id!==it.id).slice(0,3);
+return `<section class="page"><div class="container">
+<a class="crumb" href="${back[0]}">← ${back[1]}</a>
+<div class="overline">${esc(list.heading)}</div>
+<h1 class="sec-title" style="max-width:900px">${esc(it.title)}</h1>
+${it.short?`<p class="lead">${esc(it.short)}</p>`:''}
+<figure class="det-fig"><img id="detMain" src="${esc(gal[0])}" alt="${esc(it.title)}" onclick="openLB(curGal,curIdx)">
+<div class="det-count" id="detCount">1 / ${gal.length}</div></figure>
+<div class="thumbs">${gal.map((u,i)=>`<img src="${esc(u)}" class="${i===0?'on':''}" onclick="detSwap(${i})" alt="">`).join('')}</div>
+<p class="det-hint">Нажмите на фото, чтобы открыть его крупно. Стрелки ← → листают.</p>
+${others.length?`<div class="others"><div class="overline">Смотрите также</div><div class="cards">${others.map(p=>cardProject(p,kind)).join('')}</div></div>`:''}
+</div></section>`;}
+function detSwap(i){curIdx=i;$('#detMain').src=curGal[i];$('#detCount').textContent=(i+1)+' / '+curGal.length;
+document.querySelectorAll('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===i));}
+
+function viewStages(){const st=C.stages;return `
+<section class="page"><div class="container">
+<div class="overline">Как я работаю</div>
+<h1 class="sec-title">${esc(st.heading)}</h1>
+<p class="lead">${esc(st.lead)}</p>
+<div style="margin-top:36px">${st.steps.map((s,i)=>`
+<div class="step ${i%2?'rev':''}">
+<div class="step-txt"><div class="num">${String(i+1).padStart(2,'0')}</div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>
+<figure class="step-img"><img loading="lazy" src="${esc(s.img)}" alt=""></figure>
+</div>`).join('')}</div>
+</div></section>`;}
+
+function viewBlog(){return `
+<section class="page"><div class="container">
+<div class="overline">Дневник</div>
+<h1 class="sec-title">${esc(C.blog.heading)}</h1>
+<p class="lead">${esc(C.blog.lead)}</p>
+<div class="cards">${C.blog.items.map(cardPost).join('')}</div>
+</div></section>`;}
+
+function videoEmbed(u){if(!u)return'';let m;
+if(m=u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/))return `<div class="video"><iframe src="https://www.youtube.com/embed/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
+if(m=u.match(/rutube\.ru\/video\/([\w]{6,})/))return `<div class="video"><iframe src="https://rutube.ru/play/embed/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
+if(m=u.match(/vk\.com\/video(-?\d+)_(\d+)/))return `<div class="video"><iframe src="https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}&hd=2" allowfullscreen loading="lazy"></iframe></div>`;
+return `<p class="hint"><a href="${esc(u)}" target="_blank" rel="noopener" style="color:var(--gold)">Смотреть видео →</a></p>`;}
+
+function viewPost(id){const p=C.blog.items.find(x=>x.id===id);if(!p)return viewBlog();return `
+<section class="page"><div class="container narrow">
+<a class="crumb" href="#/blog">← Весь блог</a>
+<div class="post-date">${fmtDate(p.date)}</div>
+<h1 class="sec-title">${esc(p.title)}</h1>
+${p.cover?`<figure class="det-fig"><img src="${esc(p.cover)}" alt=""></figure>`:''}
+<div class="prose" style="margin-top:26px">${paras(p.text)}</div>
+${videoEmbed(p.video)}
+${(p.images&&p.images.length)?`<div class="post-imgs">${p.images.map((u,i)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.blog.items.find(x=>x.id==='${p.id}').images,${i})" alt="">`).join('')}</div>`:''}
+</div></section>`;}
+
+function viewAbout(){return `
+<section class="page"><div class="container">
+<div class="overline">${esc(C.site.logoText)}</div>
+<h1 class="sec-title">${esc(C.about.heading)}</h1>
+<div class="about">
+<figure><img src="${esc(C.about.photo)}" alt=""></figure>
+<div class="prose">${paras(C.about.text)}</div>
+</div>
+</div></section>`;}
+
+function viewContacts(){return `
+<section class="page"><div class="container narrow2">
+<div class="overline">Связаться</div>
+<h1 class="sec-title">${esc(C.contacts.heading)}</h1>
+<p class="lead">${esc(C.contacts.intro)}</p>
+<div class="c-lines">${C.contacts.lines.map(l=>`<div class="c-line">${esc(l)}</div>`).join('')}</div>
+<div class="soc-big">${C.socials.filter(s=>(s.url||'').trim()).map(s=>`<a class="btn small soc-btn" href="${esc(s.url)}" target="_blank" rel="noopener">${ICON[s.icon]||''}<span>${esc(s.name)}</span></a>`).join('')}</div>
+</div></section>`;}
+
+/* ================== ЛАЙТБОКС ================== */
+function openLB(gal,i){curGal=gal||[];curIdx=i||0;if(!curGal.length)return;renderLB();}
+function renderLB(){$('#modalRoot').innerHTML=`<div class="lb" onclick="if(event.target===this)closeLB()">
+<button class="lb-x" onclick="closeLB()">✕</button>
+<button class="lb-a l" onclick="lbNav(-1)">‹</button>
+<img id="lbImg" src="${esc(curGal[curIdx])}" alt="">
+<button class="lb-a r" onclick="lbNav(1)">›</button>
+<div class="lb-c" id="lbCount">${curIdx+1} / ${curGal.length}</div></div>`;}
+function lbNav(d){curIdx=(curIdx+d+curGal.length)%curGal.length;$('#lbImg').src=curGal[curIdx];$('#lbCount').textContent=(curIdx+1)+' / '+curGal.length;}
+function closeLB(){$('#modalRoot').innerHTML='';}
+document.addEventListener('keydown',e=>{if($('#modalRoot').innerHTML){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1);}});
+
+/* ================== АДМИНКА ================== */
+const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'pub',t:'Публикация'}];
+let adminTab='main',portKind='projects';
+const f=(l,c)=>`<div class="f-label">${l}</div>${c}`;
+const inp=(p,v,ph)=>`<input class="inp" value="${esc(v)}" placeholder="${esc(ph||'')}" oninput="upd('${p}',this.value)">`;
+const ta=(p,v,r)=>`<textarea class="inp" rows="${r||4}" oninput="upd('${p}',this.value)">${esc(v)}</textarea>`;
+function coverBlock(path,val){const isData=String(val||'').startsWith('data:');
+return `<div class="f-row"><img class="thumb" src="${esc(val)}" alt="">
+<div class="grow f-row" style="flex-wrap:wrap">
+<label class="mini-btn">Загрузить файл<input type="file" accept="image/*" hidden onchange="uploadTo('${path}',this)"></label>
+<input class="inp" style="flex:1;min-width:200px" placeholder="или вставьте ссылку (https://...)" value="${isData?'':esc(val)}" oninput="upd('${path}',this.value)">
+</div></div>`;}
+
+function viewAdmin(){
+if(!sessionStorage.getItem('osadeAuth')){return `<section class="page"><div class="container" style="max-width:460px">
+<div class="overline">OSADE · Админ-панель</div><h2 class="sec-title">Вход</h2>
+<div class="f-row" style="margin-top:22px;flex-wrap:wrap">
+<input class="inp" id="pwdIn" type="password" placeholder="Пароль" style="flex:1;min-width:200px" onkeydown="if(event.key==='Enter')admLogin()">
+<button class="btn small" onclick="admLogin()">Войти</button></div>
+<p class="hint" style="margin-top:14px">Пароль этой копии: <b>osade2026</b> — после входа смените на свой (раздел «Главная», внизу).</p>
+</div></section>`;}
+return `<div class="admin-wrap">
+<aside class="admin-nav">${TABS.map(t=>`<button data-t="${t.k}" onclick="admTab('${t.k}')">${t.t}</button>`).join('')}</aside>
+<div>
+<div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
+<div class="f-row" style="flex-wrap:wrap">
+<span class="ver-tag">OSADE v4</span>
+<button class="mini-btn add" onclick="exportJSON()">⬇ content.json</button>
+<a class="mini-btn" href="#/">На сайт ↗</a>
+<button class="mini-btn danger" onclick="admLogout()">Выйти</button>
+</div></div>
+<div id="admBody"></div>
+</div></div>`;}
+function admLogin(){const v=$('#pwdIn').value;const p=localStorage.getItem(LS_PWD)||PWD_DEFAULT;
+if(v===p){sessionStorage.setItem('osadeAuth','1');route();}else toast('Неверный пароль');}
+function admLogout(){sessionStorage.removeItem('osadeAuth');route();}
+function admTab(t){adminTab=t;document.querySelectorAll('.admin-nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+const b=$('#admBody');if(b)b.innerHTML=renderTab(t);}
+function renderTab(t){switch(t){
+case 'main':return tabMain();case 'about':return tabAbout();case 'portfolio':return tabPortfolio();
+case 'stages':return tabStages();case 'blog':return tabBlog();case 'contacts':return tabContacts();
+case 'socials':return tabSocials();case 'pub':return tabPub();}return '';}
+
+function tabMain(){return `
+${f('Текст логотипа (в левом верхнем углу)',inp('site.logoText',C.site.logoText))}
+${f('Заголовок на главной',inp('site.heroTitle',C.site.heroTitle))}
+${f('Подзаголовок. Слова разделяйте звёздочкой * — вместо неё будет золотой знак ✳',inp('site.heroSub',C.site.heroSub))}
+${f('Фоновое фото главной (лучше 1920×1080, тёмный вечерний кадр)',coverBlock('site.heroImg',C.site.heroImg))}
+${f('Девиз-абзац под первым экраном',ta('site.intro',C.site.intro,3))}
+${f('Заголовок блока «Избранное»',inp('site.featuredHeading',C.site.featuredHeading))}
+${f('Строка в подвале (после © и года)',inp('site.footer',C.site.footer))}
+<div class="f-label">Смена пароля администратора</div>
+<div class="f-row" style="flex-wrap:wrap">
+<input class="inp" id="pw1" type="password" placeholder="новый пароль" style="max-width:220px">
+<input class="inp" id="pw2" type="password" placeholder="повторите пароль" style="max-width:220px">
+<button class="mini-btn" onclick="setPwd()">Сменить пароль</button>
+</div>`;}
+function setPwd(){const a=$('#pw1').value,b=$('#pw2').value;
+if(a.length<4)return toast('Пароль — от 4 символов');if(a!==b)return toast('Пароли не совпадают');
+localStorage.setItem(LS_PWD,a);$('#pw1').value='';$('#pw2').value='';toast('Пароль обновлён');}
+
+function tabAbout(){return `
+<p class="hint">Здесь ваше фото и рассказ о себе. Абзацы разделяйте пустой строкой.</p>
+${f('Портретное фото (лучше вертикальное)',coverBlock('about.photo',C.about.photo))}
+${f('Заголовок страницы',inp('about.heading',C.about.heading))}
+${f('Текст',ta('about.text',C.about.text,12))}`;}
+
+function setPort(k){portKind=k;admTab('portfolio');}
+function tabPortfolio(){
+const g=C[portKind],list=portKind,isPr=list==='projects';
+let h=`<div class="sub-tabs">
+<button class="mini-btn ${isPr?'on':''}" onclick="setPort('projects')">Проекты</button>
+<button class="mini-btn ${!isPr?'on':''}" onclick="setPort('concepts')">Концепции</button>
+<button class="mini-btn add" style="margin-left:auto" onclick="${isPr?'addProject()':'addConcept()'}">+ Добавить ${isPr?'проект':'концепцию'}</button></div>`;
+h+=f('Заголовок раздела',inp(list+'.heading',g.heading));
+h+=f('Подводка',ta(list+'.lead',g.lead,2));
+h+=g.items.map((it,i)=>itemCard(list,it,i)).join('');
+return h;}
+function itemCard(list,it,i){
+const gp=list+'.items.'+i,gal=it.gallery||[];
+return `<div class="item-card">
+<div class="f-row" style="align-items:flex-start">
+<img class="thumb" src="${esc(it.cover)}" alt="">
+<div class="grow">
+${f('Название',inp(gp+'.title',it.title))}
+${f('Обложка (заглавная картинка)',coverBlock(gp+'.cover',it.cover))}
+</div>
+<div class="v-btns">
+<button title="выше" onclick="moveItem('${list}',${i},-1)">↑</button>
+<button title="ниже" onclick="moveItem('${list}',${i},1)">↓</button>
+<button class="danger" title="удалить" onclick="delItem('${list}',${i})">✕</button>
+</div>
+</div>
+${f('Краткое описание (для карточки)',ta(gp+'.short',it.short,2))}
+${f('Галерея страницы проекта — фото ('+gal.length+')',galleryEditor(list,i))}
+</div>`;}
+function galleryEditor(list,i){
+const arr=list==='blog'?(C.blog.items[i].images||[]):(C[list].items[i].gallery||[]);
+const ref=list==='blog'?`C.blog.items[${i}].images`:`C.${list}.items[${i}].gallery`;
+const items=arr.map((u,j)=>`<div class="g-item">
+<img src="${esc(u)}" onclick="openLB(${ref},${j})" alt="">
+<div class="g-ctl">
+<button onclick="galMove('${list}',${i},${j},-1)">↑</button>
+<button onclick="galMove('${list}',${i},${j},1)">↓</button>
+<button class="danger" onclick="galDel('${list}',${i},${j})">✕</button>
+</div></div>`).join('');
+return `<div class="g-grid">${items||'<span class="hint">Пока пусто</span>'}</div>
+<div class="f-row g-add" style="flex-wrap:wrap">
+<input class="inp" id="gurl-${list}-${i}" placeholder="ссылка на фото (https://...)" style="max-width:340px">
+<button class="mini-btn" onclick="galAddUrl('${list}',${i})">+ по ссылке</button>
+<label class="mini-btn">+ загрузить файл<input type="file" accept="image/*" hidden onchange="galAddFile('${list}',${i},this)"></label>
+</div>`;}
+function galArr(list,i){return list==='blog'?C.blog.items[i].images:C[list].items[i].gallery;}
+function galMove(list,i,j,d){const a=galArr(list,i),k=j+d;if(k<0||k>=a.length)return;[a[j],a[k]]=[a[k],a[j]];doSave();admTab(adminTab);}
+function galDel(list,i,j){if(!confirm('Удалить фото?'))return;galArr(list,i).splice(j,1);doSave();admTab(adminTab);}
+function galAddUrl(list,i){const el=document.getElementById('gurl-'+list+'-'+i);const u=(el.value||'').trim();
+if(!u)return toast('Вставьте ссылку на фото');galArr(list,i).push(u);doSave();admTab(adminTab);}
+function galAddFile(list,i,inp2){const file=inp2.files[0];if(!file)return;
+fileToDataURL(file).then(u=>{galArr(list,i).push(u);doSave();admTab(adminTab);});}
+function moveItem(list,i,d){const a=C[list].items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab(adminTab);}
+function delItem(list,i){const a=C[list].items;if(!confirm('Удалить «'+(a[i].title||'без названия')+'»?'))return;a.splice(i,1);doSave();admTab(adminTab);}
+function addProject(){C.projects.items.push({id:uid(),title:'Новый проект',short:'краткое описание',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+function addConcept(){C.concepts.items.push({id:uid(),title:'Новая концепция',short:'краткое описание',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+
+function tabStages(){return `
+${f('Заголовок',inp('stages.heading',C.stages.heading))}
+${f('Подводка',ta('stages.lead',C.stages.lead,2))}
+<div class="f-row" style="margin:10px 0 16px"><button class="mini-btn add" onclick="addStep()">+ Добавить этап</button></div>
+${C.stages.steps.map((s,i)=>{const p='stages.steps.'+i;return `<div class="item-card">
+<div class="f-row" style="align-items:flex-start">
+<img class="thumb" src="${esc(s.img)}" alt="">
+<div class="grow">
+${f('Название этапа '+(i+1),inp(p+'.title',s.title))}
+${f('Описание',ta(p+'.text',s.text,3))}
+${f('Фото',coverBlock(p+'.img',s.img))}
+</div>
+<div class="v-btns">
+<button onclick="moveStep(${i},-1)">↑</button>
+<button onclick="moveStep(${i},1)">↓</button>
+<button class="danger" onclick="delStep(${i})">✕</button>
+</div>
+</div></div>`;}).join('')}`;}
+function addStep(){C.stages.steps.push({title:'Новый этап',text:'',img:pic(uid(),1200,900)});doSave();admTab(adminTab);}
+function moveStep(i,d){const a=C.stages.steps,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab(adminTab);}
+function delStep(i){if(!confirm('Удалить этап?'))return;C.stages.steps.splice(i,1);doSave();admTab(adminTab);}
+
+function tabBlog(){return `
+${f('Заголовок',inp('blog.heading',C.blog.heading))}
+${f('Подводка',ta('blog.lead',C.blog.lead,2))}
+<div class="f-row" style="margin:10px 0 16px"><button class="mini-btn add" onclick="addPost()">+ Новый пост</button></div>
+${C.blog.items.map((p,i)=>{const gp='blog.items.'+i;return `<div class="item-card">
+<div class="f-row" style="align-items:flex-start">
+<img class="thumb" src="${esc(p.cover)}" alt="">
+<div class="grow">
+<div class="f-row" style="flex-wrap:wrap">
+<input class="inp" type="date" style="max-width:190px" value="${esc(p.date)}" onchange="upd('${gp}.date',this.value)">
+</div>
+${f('Заголовок',inp(gp+'.title',p.title))}
+${f('Обложка',coverBlock(gp+'.cover',p.cover))}
+</div>
+<div class="v-btns">
+<button onclick="moveItem('blog',${i},-1)">↑</button>
+<button onclick="moveItem('blog',${i},1)">↓</button>
+<button class="danger" onclick="delItem('blog',${i})">✕</button>
+</div>
+</div>
+${f('Текст поста (абзацы — через пустую строку)',ta(gp+'.text',p.text,8))}
+${f('Видео по ссылке (YouTube, VK Видео или Rutube) — необязательно',inp(gp+'.video',p.video||'','https://...'))}
+${f('Фото в посте ('+((p.images||[]).length)+')',galleryEditor('blog',i))}
+</div>`;}).join('')}`;}
+function addPost(){C.blog.items.unshift({id:uid(),date:new Date().toISOString().slice(0,10),title:'Новый пост',cover:pic(uid(),1200,750),text:'',images:[],video:''});doSave();admTab(adminTab);}
+
+function tabContacts(){return `
+<p class="hint">Всё здесь — обычный текст, пишите как удобно: адрес, телефон, почта, условия встреч.</p>
+${f('Заголовок',inp('contacts.heading',C.contacts.heading))}
+${f('Вступительный текст',ta('contacts.intro',C.contacts.intro,3))}
+${f('Строки контактов',C.contacts.lines.map((l,i)=>`<div class="f-row" style="margin-bottom:8px"><input class="inp" value="${esc(l)}" oninput="upd('contacts.lines.${i}',this.value)"><button class="mini-btn danger" onclick="delLine(${i})">✕</button></div>`).join(''))}
+<button class="mini-btn" onclick="addLine()">+ строка</button>`;}
+function addLine(){C.contacts.lines.push('');doSave();admTab(adminTab);}
+function delLine(i){C.contacts.lines.splice(i,1);doSave();admTab(adminTab);}
+
+function tabSocials(){
+return `<p class="hint">Для каждой кнопки: выберите иконку, впишите название и ссылку. Кнопки без ссылки полупрозрачные, а на странице «Контакты» не показываются. Можно добавлять и удалять кнопки.</p>
+${C.socials.map((s,i)=>`<div class="item-card"><div class="f-row" style="flex-wrap:wrap">
+<span class="soc-ic">${ICON[s.icon]||''}</span>
+<select class="inp" style="width:auto;min-width:160px" onchange="upd('socials.${i}.icon',this.value);admTab('socials')">
+${SOC_LIST.map(o=>`<option value="${o}" ${s.icon===o?'selected':''}>${SOC_NAMES[o]}</option>`).join('')}
+</select>
+<input class="inp" style="flex:1;min-width:130px;max-width:190px" value="${esc(s.name)}" placeholder="название" oninput="upd('socials.${i}.name',this.value)">
+<input class="inp" style="flex:2;min-width:220px" value="${esc(s.url)}" placeholder="${esc(URL_HINT[s.icon]||'https://...')}" oninput="upd('socials.${i}.url',this.value)">
+<button class="mini-btn danger" onclick="delSoc(${i})">✕</button>
+</div></div>`).join('')}
+<button class="mini-btn" onclick="addSoc()">+ ещё кнопка</button>
+<p class="hint" style="margin-top:14px">Примеры ссылок: MAX — <b>https://max.ru/u/код</b> · ВК — <b>https://vk.com/ваш_id</b> · Telegram — <b>https://t.me/ник</b> · WhatsApp — <b>https://wa.me/79001234567</b> · Одноклассники — <b>https://ok.ru/профиль</b> · Телефон — <b>tel:+79001234567</b> · Почта — <b>mailto:mail@yandex.ru</b></p>`;}
+function addSoc(){C.socials.push({icon:'max',name:'MAX',url:''});doSave();admTab('socials');}
+function delSoc(i){if(!confirm('Удалить эту кнопку?'))return;C.socials.splice(i,1);doSave();admTab('socials');}
+
+function tabPub(){const d=C.meta&&C.meta.exportedAt?new Date(C.meta.exportedAt).toLocaleString('ru-RU'):null;
+return `<div class="item-card">
+<h3 style="font-family:var(--serif);font-size:21px;margin-bottom:12px">Как опубликовать правки на сайте</h3>
+<ol class="pub-steps">
+<li>Нажмите <b>«Скачать content.json»</b> — в файл сохранятся все ваши правки.</li>
+<li>Откройте репозиторий сайта на GitHub → <b>Add file → Upload files</b>.</li>
+<li>Перетащите скачанный файл — он заменит старый → нажмите <b>Commit changes</b>.</li>
+<li>Через 1–2 минуты обновлённый сайт увидят все посетители.</li>
+</ol>
+<div class="f-row" style="flex-wrap:wrap;margin:18px 0 6px">
+<button class="mini-btn add" onclick="exportJSON()">⬇ Скачать content.json</button>
+<label class="mini-btn">⬆ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
+<button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
+</div>
+<p class="hint">«Загрузить backup» — восстановить контент из ранее скачанного файла (удобно при работе с другого компьютера).</p>
+<p class="hint">Фото, добавленные кнопкой «Загрузить файл», вшиваются внутрь content.json — это просто, но файл растёт. Для больших галерей лучше добавлять фото по ссылкам: сначала загрузите фото в репозиторий (Add file → Upload files, в имени файла укажите <b>images/имя.jpg</b>), затем здесь нажмите «+ по ссылке» и впишите <b>images/имя.jpg</b>.</p>
+${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
+</div>`;}
+function exportJSON(){
+C.meta=C.meta||{};C.meta.updatedAt=Date.now();C.meta.exportedAt=Date.now();doSave();
+const blob=new Blob([JSON.stringify(C,null,2)],{type:'application/json;charset=utf-8'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='content.json';
+document.body.appendChild(a);a.click();a.remove();
+toast('Файл скачан. Загрузите его на хостинг — шаги выше.');}
+function importJSON(inp2){const fl=inp2.files[0];if(!fl)return;const r=new FileReader();
+r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.site)throw 0;
+C=mergeDeep(structuredClone(DEFAULTS),j);doSave();renderChrome();admTab('pub');toast('Контент загружен из файла');
+}catch(e){toast('Не удалось прочитать файл');}};r.readAsText(fl);}
+function resetAll(){if(!confirm('Удалить все правки и вернуть демо-контент?'))return;
+localStorage.removeItem(LS_KEY);C=structuredClone(DEFAULTS);renderChrome();admTab('main');toast('Возвращён демо-контент');}
+
+/* ================== МАРШРУТИЗАЦИЯ ================== */
+function route(){
+closeMobile();
+const h=(location.hash||'#/').replace(/^#\/?/,'');
+const seg=h.split('/').filter(Boolean);
+let html='',key='home';
+if(seg.length===0){html=viewHome();}
+else if(seg[0]==='about'){key='about';html=viewAbout();}
+else if(seg[0]==='projects'||seg[0]==='project'||seg[0]==='project'){key='portfolio';html=seg[1]?viewDetail('project',seg[1]):viewList('projects');}
+else if(seg[0]==='concepts'||seg[0]==='concept'){key='portfolio';html=seg[1]?viewDetail('concept',seg[1]):viewList('concepts');}
+else if(seg[0]==='stages'){key='stages';html=viewStages();}
+else if(seg[0]==='blog'){key='blog';html=seg[1]?viewPost(seg[1]):viewBlog();}
+else if(seg[0]==='contacts'){key='contacts';html=viewContacts();}
+else if(seg[0]==='admin'){key='admin';html=viewAdmin();}
+else {html=viewHome();}
+$('#app').innerHTML=html;
+setNavActive(key);
+window.scrollTo(0,0);
+if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
+}
+
+/* ================== СТАРТ ================== */
+(async function(){
+await loadContent();
+migrateSocials();
+renderChrome();
+route();
+addEventListener('hashchange',route);
+})();
+</script>
+</body>
+</html>

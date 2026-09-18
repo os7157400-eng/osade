@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updatedAt": 1789669228811,
-    "exportedAt": 1789669228811
+    "updatedAt": 1789715310746,
+    "exportedAt": 1789715310746
   },
   "site": {
     "logoText": "OSADE",
@@ -21,12 +21,12 @@
     {
       "icon": "vk",
       "name": "ВКонтакте",
-      "url": "vk.me/im/convo/152155657?entrypoint=list_all"
+      "url": "https://vk.com/id152155657"
     },
     {
       "icon": "tg",
       "name": "Telegram",
-      "url": "t.me/sergeeva_olgas"
+      "url": "https://t.me/sergeeva_olgas"
     }
   ],
   "about": {

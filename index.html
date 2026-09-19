@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v4 -->
+<!-- OSADE v5 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -29,7 +29,6 @@ button{font-family:var(--sans);cursor:pointer;background:none;border:none;color:
 .container.narrow{max-width:880px}
 .container.narrow2{max-width:760px}
 
-/* ---------- header ---------- */
 header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 4vw;transition:.35s}
 header.solid{background:rgba(13,11,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 4vw}
 .logo{font-family:var(--serif);font-size:25px;letter-spacing:6px;font-weight:600}
@@ -44,12 +43,11 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .drop-menu a{display:block;padding:9px 22px;font-size:15px}
 .right{display:flex;align-items:center;gap:16px}
 
-/* ---------- СОЦСЕТИ: крупные контрастные кнопки ---------- */
 .soc{display:flex;gap:12px;align-items:center}
-.soc a{width:32px;height:32px;background:#fff;color:#0b0910;border-radius:50%;display:grid;place-items:center;box-shadow:0 3px 14px rgba(0,0,0,.55);transition:.25s}
+.soc a{width:44px;height:44px;background:#fff;color:#0b0910;border-radius:50%;display:grid;place-items:center;box-shadow:0 2px 12px rgba(0,0,0,.5);transition:.25s}
 .soc a:hover{background:#111;color:#fff;transform:translateY(-2px)}
 .soc a.off{opacity:.4}
-.soc svg{width:27px;height:27px;fill:currentColor}
+.soc svg{width:22px;height:22px;fill:currentColor}
 
 .burger{display:none;width:38px;height:34px;position:relative;z-index:70}
 .burger span{position:absolute;left:7px;right:7px;height:1.5px;background:var(--ink);transition:.3s}
@@ -63,7 +61,6 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .mnav a:hover{color:var(--gold)}
 .mnav .soc{margin-top:16px}
 
-/* ---------- hero / home ---------- */
 .hero{min-height:100vh;display:grid;place-items:center;text-align:center;position:relative;background-size:cover;background-position:center}
 .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,13,.62),rgba(10,8,13,.30) 42%,rgba(10,8,13,.74))}
 .hero-inner{position:relative;padding:130px 24px 90px;max-width:1150px}
@@ -93,7 +90,6 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .btn.ghost:hover{border-color:var(--gold)}
 .post-date{font-family:var(--sans);font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
 
-/* ---------- inner pages ---------- */
 .page{padding:150px 0 90px;min-height:60vh}
 .crumb{display:inline-block;margin-bottom:24px;color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.08em}
 .crumb:hover{color:var(--gold)}
@@ -105,6 +101,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .thumbs img:hover{opacity:.85}
 .thumbs img.on{opacity:1;border-color:var(--gold)}
 .det-hint{color:#8f8676;font-size:13px;font-family:var(--sans);margin-top:14px}
+.story-title{font-family:var(--serif);font-size:clamp(20px,2.4vw,26px);margin:44px 0 4px;color:var(--gold)}
 .others{margin-top:80px}
 .step{display:grid;grid-template-columns:1.05fr .95fr;gap:6%;align-items:center;padding:52px 0;border-top:1px solid var(--line)}
 .step.rev .step-txt{order:2}.step.rev .step-img{order:1}
@@ -128,7 +125,6 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .post-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:26px 0}
 .post-imgs img{aspect-ratio:4/3;object-fit:cover;width:100%;cursor:zoom-in}
 
-/* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:46px 4vw 30px;text-align:center;margin-top:40px}
 .f-logo{font-family:var(--serif);letter-spacing:6px;font-size:20px;margin-bottom:16px}
 .f-nav{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-bottom:18px;font-family:var(--serif);font-size:15px}
@@ -136,7 +132,6 @@ footer{border-top:1px solid var(--line);padding:46px 4vw 30px;text-align:center;
 footer .soc{justify-content:center;margin-bottom:18px}
 .f-copy{color:#7d7466;font-size:13px;font-family:var(--sans);letter-spacing:.05em}
 
-/* ---------- lightbox ---------- */
 .lb{position:fixed;inset:0;background:rgba(8,6,10,.95);z-index:100;display:flex;align-items:center;justify-content:center}
 .lb img{max-width:88vw;max-height:86vh;object-fit:contain}
 .lb-x{position:absolute;top:16px;right:24px;font-size:26px;color:#fff}
@@ -144,7 +139,6 @@ footer .soc{justify-content:center;margin-bottom:18px}
 .lb-a.l{left:6px}.lb-a.r{right:6px}
 .lb-c{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--sans);letter-spacing:.2em;color:var(--muted);font-size:13px}
 
-/* ---------- admin ---------- */
 .admin-wrap{display:grid;grid-template-columns:230px 1fr;gap:40px;padding:140px 4vw 90px;max-width:1280px;margin:0 auto}
 .admin-nav{position:sticky;top:100px;align-self:start;display:flex;flex-direction:column;gap:4px}
 .admin-nav button{text-align:left;padding:10px 14px;border-left:1px solid var(--line);color:var(--muted);font-size:14.5px;letter-spacing:.04em;font-family:var(--serif)}
@@ -247,18 +241,18 @@ photo:pic('osade-portrait',900,1100),
 text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
 projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
 items:[
-{id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',cover:pic('osade-p1-cover',1200,900),
+{id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',story:'',cover:pic('osade-p1-cover',1200,900),
 gallery:[pic('osade-p1-1',1600,1000),pic('osade-p1-2',1600,1000),pic('osade-p1-3',1600,1000),pic('osade-p1-4',1600,1000),pic('osade-p1-5',1600,1000)]},
-{id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',cover:pic('osade-p2-cover',1200,900),
+{id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',story:'',cover:pic('osade-p2-cover',1200,900),
 gallery:[pic('osade-p2-1',1600,1000),pic('osade-p2-2',1600,1000),pic('osade-p2-3',1600,1000),pic('osade-p2-4',1600,1000)]},
-{id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',cover:pic('osade-p3-cover',1200,900),
+{id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',story:'',cover:pic('osade-p3-cover',1200,900),
 gallery:[pic('osade-p3-1',1600,1000),pic('osade-p3-2',1600,1000),pic('osade-p3-3',1600,1000),pic('osade-p3-4',1600,1000),pic('osade-p3-5',1600,1000),pic('osade-p3-6',1600,1000)]}
 ]},
 concepts:{heading:'Концепции', lead:'Идеи и образы, которые ждут своего места — возможно, вашего.',
 items:[
-{id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',cover:pic('osade-c1-cover',1200,900),
+{id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',story:'',cover:pic('osade-c1-cover',1200,900),
 gallery:[pic('osade-c1-1',1600,1000),pic('osade-c1-2',1600,1000),pic('osade-c1-3',1600,1000)]},
-{id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',cover:pic('osade-c2-cover',1200,900),
+{id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',story:'',cover:pic('osade-c2-cover',1200,900),
 gallery:[pic('osade-c2-1',1600,1000),pic('osade-c2-2',1600,1000),pic('osade-c2-3',1600,1000)]}
 ]},
 stages:{heading:'Этапы работы', lead:'Путь от первой встречи до передачи ключей — спокойно, прозрачно, по шагам. Каждый текст и фото заменяются в разделе «Админ».',
@@ -308,7 +302,7 @@ mail:'<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.
 };
 const SOC_LIST=['max','vk','tg','wa','pin','ok','phone','mail'];
 const SOC_NAMES={max:'MAX',vk:'ВКонтакте',tg:'Telegram',wa:'WhatsApp',pin:'Pinterest',ok:'Одноклассники',phone:'Телефон',mail:'E-mail'};
-const URL_HINT={max:'https://max.ru/u/код',vk:'https://vk.com/ваш_id',tg:'https://t.me/ваш_ник',wa:'https://wa.me/79001234567',pin:'https://ru.pinterest.com/профиль',ok:'https://ok.ru/профиль',phone:'tel:+79001234567',mail:'mailto:mail@yandex.ru'};
+const URL_HINT={max:'https://max.ru/u/код',vk:'https://vk.me/ваш_id',tg:'https://t.me/ваш_ник',wa:'https://wa.me/79001234567',pin:'https://ru.pinterest.com/профиль',ok:'https://ok.ru/профиль',phone:'tel:+79001234567',mail:'mailto:mail@yandex.ru'};
 
 /* ================== КОНТЕНТ: ЗАГРУЗКА / СОХРАНЕНИЕ ================== */
 const LS_KEY='osade_content_v1', LS_PWD='osade_pwd_v2', PWD_DEFAULT='osade2026';
@@ -321,16 +315,6 @@ let pick=null;
 if(published&&local)pick=((local.meta&&local.meta.updatedAt)||0)>=(published.meta&&published.meta.updatedAt||0)?local:published;
 else pick=local||published;
 C=pick?mergeDeep(structuredClone(DEFAULTS),pick):structuredClone(DEFAULTS);
-}
-/* перенос старого набора кнопок (ВК, Pinterest, WhatsApp, Telegram) на новый (MAX, ВК, Telegram, Pinterest) с сохранением ссылок */
-function migrateSocials(){
-const oldSig=['vk','pin','wa','tg'].join();
-if(C.socials&&C.socials.map(s=>s.icon).join()===oldSig){
-const by={};C.socials.forEach(s=>by[s.icon]=s.url);
-C.socials=[['max','MAX'],['vk','ВКонтакте'],['tg','Telegram'],['pin','Pinterest']]
-.map(([ic,nm])=>({icon:ic,name:nm,url:by[ic]||''}));
-doSave();
-}
 }
 let saveT;
 function scheduleSave(){clearTimeout(saveT);saveT=setTimeout(doSave,400);}
@@ -421,9 +405,10 @@ return `<section class="page"><div class="container">
 <div class="overline">${esc(list.heading)}</div>
 <h1 class="sec-title" style="max-width:900px">${esc(it.title)}</h1>
 ${it.short?`<p class="lead">${esc(it.short)}</p>`:''}
+${(it.story&&it.story.trim())?`<h2 class="story-title">История проекта</h2><div class="prose">${paras(it.story)}</div>`:''}
 <figure class="det-fig"><img id="detMain" src="${esc(gal[0])}" alt="${esc(it.title)}" onclick="openLB(curGal,curIdx)">
 <div class="det-count" id="detCount">1 / ${gal.length}</div></figure>
-<div class="thumbs">${gal.map((u,i)=>`<img src="${esc(u)}" class="${i===0?'on':''}" onclick="detSwap(${i})" alt="">`).join('')}</div>
+<div class="thumbs">${gal.map((u,i)=>`<img src="${esc(u)}" class="${i===0?'on':''}" onclick="detSwap(${i})" alt="${esc(it.title)} — фото ${i+1}">`).join('')}</div>
 <p class="det-hint">Нажмите на фото, чтобы открыть его крупно. Стрелки ← → листают.</p>
 ${others.length?`<div class="others"><div class="overline">Смотрите также</div><div class="cards">${others.map(p=>cardProject(p,kind)).join('')}</div></div>`:''}
 </div></section>`;}
@@ -438,7 +423,7 @@ function viewStages(){const st=C.stages;return `
 <div style="margin-top:36px">${st.steps.map((s,i)=>`
 <div class="step ${i%2?'rev':''}">
 <div class="step-txt"><div class="num">${String(i+1).padStart(2,'0')}</div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>
-<figure class="step-img"><img loading="lazy" src="${esc(s.img)}" alt=""></figure>
+<figure class="step-img"><img loading="lazy" src="${esc(s.img)}" alt="${esc(s.title)}"></figure>
 </div>`).join('')}</div>
 </div></section>`;}
 
@@ -461,10 +446,10 @@ function viewPost(id){const p=C.blog.items.find(x=>x.id===id);if(!p)return viewB
 <a class="crumb" href="#/blog">← Весь блог</a>
 <div class="post-date">${fmtDate(p.date)}</div>
 <h1 class="sec-title">${esc(p.title)}</h1>
-${p.cover?`<figure class="det-fig"><img src="${esc(p.cover)}" alt=""></figure>`:''}
+${p.cover?`<figure class="det-fig"><img src="${esc(p.cover)}" alt="${esc(p.title)}"></figure>`:''}
 <div class="prose" style="margin-top:26px">${paras(p.text)}</div>
 ${videoEmbed(p.video)}
-${(p.images&&p.images.length)?`<div class="post-imgs">${p.images.map((u,i)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.blog.items.find(x=>x.id==='${p.id}').images,${i})" alt="">`).join('')}</div>`:''}
+${(p.images&&p.images.length)?`<div class="post-imgs">${p.images.map((u,i)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.blog.items.find(x=>x.id==='${p.id}').images,${i})" alt="${esc(p.title)}">`).join('')}</div>`:''}
 </div></section>`;}
 
 function viewAbout(){return `
@@ -472,7 +457,7 @@ function viewAbout(){return `
 <div class="overline">${esc(C.site.logoText)}</div>
 <h1 class="sec-title">${esc(C.about.heading)}</h1>
 <div class="about">
-<figure><img src="${esc(C.about.photo)}" alt=""></figure>
+<figure><img src="${esc(C.about.photo)}" alt="Портрет"></figure>
 <div class="prose">${paras(C.about.text)}</div>
 </div>
 </div></section>`;}
@@ -517,14 +502,14 @@ if(!sessionStorage.getItem('osadeAuth')){return `<section class="page"><div clas
 <div class="f-row" style="margin-top:22px;flex-wrap:wrap">
 <input class="inp" id="pwdIn" type="password" placeholder="Пароль" style="flex:1;min-width:200px" onkeydown="if(event.key==='Enter')admLogin()">
 <button class="btn small" onclick="admLogin()">Войти</button></div>
-<p class="hint" style="margin-top:14px">Пароль этой копии: <b>osade2026</b> — после входа смените на свой (раздел «Главная», внизу).</p>
+<p class="hint" style="margin-top:14px">Введите ваш пароль администратора.</p>
 </div></section>`;}
 return `<div class="admin-wrap">
 <aside class="admin-nav">${TABS.map(t=>`<button data-t="${t.k}" onclick="admTab('${t.k}')">${t.t}</button>`).join('')}</aside>
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v4</span>
+<span class="ver-tag">OSADE v5</span>
 <button class="mini-btn add" onclick="exportJSON()">⬇ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -591,7 +576,8 @@ ${f('Обложка (заглавная картинка)',coverBlock(gp+'.cover
 <button class="danger" title="удалить" onclick="delItem('${list}',${i})">✕</button>
 </div>
 </div>
-${f('Краткое описание (для карточки)',ta(gp+'.short',it.short,2))}
+${f('Краткое описание (одна строка — видно в списке под названием)',ta(gp+'.short',it.short,2))}
+${f('История проекта — большой текст на странице проекта (абзацы через пустую строку; можно оставить пустым)',ta(gp+'.story',it.story||'',6))}
 ${f('Галерея страницы проекта — фото ('+gal.length+')',galleryEditor(list,i))}
 </div>`;}
 function galleryEditor(list,i){
@@ -619,8 +605,8 @@ function galAddFile(list,i,inp2){const file=inp2.files[0];if(!file)return;
 fileToDataURL(file).then(u=>{galArr(list,i).push(u);doSave();admTab(adminTab);});}
 function moveItem(list,i,d){const a=C[list].items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab(adminTab);}
 function delItem(list,i){const a=C[list].items;if(!confirm('Удалить «'+(a[i].title||'без названия')+'»?'))return;a.splice(i,1);doSave();admTab(adminTab);}
-function addProject(){C.projects.items.push({id:uid(),title:'Новый проект',short:'краткое описание',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
-function addConcept(){C.concepts.items.push({id:uid(),title:'Новая концепция',short:'краткое описание',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+function addProject(){C.projects.items.push({id:uid(),title:'Новый проект',short:'краткое описание',story:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+function addConcept(){C.concepts.items.push({id:uid(),title:'Новая концепция',short:'краткое описание',story:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
 
 function tabStages(){return `
 ${f('Заголовок',inp('stages.heading',C.stages.heading))}
@@ -680,7 +666,7 @@ function addLine(){C.contacts.lines.push('');doSave();admTab(adminTab);}
 function delLine(i){C.contacts.lines.splice(i,1);doSave();admTab(adminTab);}
 
 function tabSocials(){
-return `<p class="hint">Для каждой кнопки: выберите иконку, впишите название и ссылку. Кнопки без ссылки полупрозрачные, а на странице «Контакты» не показываются. Можно добавлять и удалять кнопки.</p>
+return `<p class="hint">Для каждой кнопки: выберите иконку, впишите название и ссылку. Кнопки без ссылки полупрозрачные, а на странице «Контакты» не показываются.</p>
 ${C.socials.map((s,i)=>`<div class="item-card"><div class="f-row" style="flex-wrap:wrap">
 <span class="soc-ic">${ICON[s.icon]||''}</span>
 <select class="inp" style="width:auto;min-width:160px" onchange="upd('socials.${i}.icon',this.value);admTab('socials')">
@@ -691,7 +677,7 @@ ${SOC_LIST.map(o=>`<option value="${o}" ${s.icon===o?'selected':''}>${SOC_NAMES[
 <button class="mini-btn danger" onclick="delSoc(${i})">✕</button>
 </div></div>`).join('')}
 <button class="mini-btn" onclick="addSoc()">+ ещё кнопка</button>
-<p class="hint" style="margin-top:14px">Примеры ссылок: MAX — <b>https://max.ru/u/код</b> · ВК — <b>https://vk.com/ваш_id</b> · Telegram — <b>https://t.me/ник</b> · WhatsApp — <b>https://wa.me/79001234567</b> · Одноклассники — <b>https://ok.ru/профиль</b> · Телефон — <b>tel:+79001234567</b> · Почта — <b>mailto:mail@yandex.ru</b></p>`;}
+<p class="hint" style="margin-top:14px">Примеры: ВК для сообщений — <b>https://vk.me/ваш_id</b> (проверьте: Настройки → Приватность → Сообщения → «Все») · Telegram — <b>https://t.me/ник</b> · MAX — <b>https://max.ru/u/код</b></p>`;}
 function addSoc(){C.socials.push({icon:'max',name:'MAX',url:''});doSave();admTab('socials');}
 function delSoc(i){if(!confirm('Удалить эту кнопку?'))return;C.socials.splice(i,1);doSave();admTab('socials');}
 
@@ -700,17 +686,16 @@ return `<div class="item-card">
 <h3 style="font-family:var(--serif);font-size:21px;margin-bottom:12px">Как опубликовать правки на сайте</h3>
 <ol class="pub-steps">
 <li>Нажмите <b>«Скачать content.json»</b> — в файл сохранятся все ваши правки.</li>
-<li>Откройте репозиторий сайта на GitHub → <b>Add file → Upload files</b>.</li>
-<li>Перетащите скачанный файл — он заменит старый → нажмите <b>Commit changes</b>.</li>
-<li>Через 1–2 минуты обновлённый сайт увидят все посетители.</li>
+<li>Откройте репозиторий osade на GitHub → <b>Add file → Upload files</b>.</li>
+<li>Перетащите файл (он заменит старый) → <b>Commit changes</b>.</li>
+<li>Через 1–2 минуты посетители увидят обновление на osade-arch.ru.</li>
 </ol>
 <div class="f-row" style="flex-wrap:wrap;margin:18px 0 6px">
 <button class="mini-btn add" onclick="exportJSON()">⬇ Скачать content.json</button>
 <label class="mini-btn">⬆ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint">«Загрузить backup» — восстановить контент из ранее скачанного файла (удобно при работе с другого компьютера).</p>
-<p class="hint">Фото, добавленные кнопкой «Загрузить файл», вшиваются внутрь content.json — это просто, но файл растёт. Для больших галерей лучше добавлять фото по ссылкам: сначала загрузите фото в репозиторий (Add file → Upload files, в имени файла укажите <b>images/имя.jpg</b>), затем здесь нажмите «+ по ссылке» и впишите <b>images/имя.jpg</b>.</p>
+<p class="hint">Фото, загруженные кнопкой «Загрузить файл», вшиваются внутрь content.json без имени файла. Чтобы картинки попадали в поиск, важные обложки лучше загружать в GitHub в папку <b>images/</b> с осмысленным именем (например <b>images/akhuba-residence.jpg</b>) и добавлять их кнопкой «+ по ссылке».</p>
 ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
 function exportJSON(){
@@ -718,7 +703,7 @@ C.meta=C.meta||{};C.meta.updatedAt=Date.now();C.meta.exportedAt=Date.now();doSav
 const blob=new Blob([JSON.stringify(C,null,2)],{type:'application/json;charset=utf-8'});
 const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='content.json';
 document.body.appendChild(a);a.click();a.remove();
-toast('Файл скачан. Загрузите его на хостинг — шаги выше.');}
+toast('Файл скачан. Загрузите его на GitHub — шаги выше.');}
 function importJSON(inp2){const fl=inp2.files[0];if(!fl)return;const r=new FileReader();
 r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.site)throw 0;
 C=mergeDeep(structuredClone(DEFAULTS),j);doSave();renderChrome();admTab('pub');toast('Контент загружен из файла');
@@ -734,7 +719,7 @@ const seg=h.split('/').filter(Boolean);
 let html='',key='home';
 if(seg.length===0){html=viewHome();}
 else if(seg[0]==='about'){key='about';html=viewAbout();}
-else if(seg[0]==='projects'||seg[0]==='project'||seg[0]==='project'){key='portfolio';html=seg[1]?viewDetail('project',seg[1]):viewList('projects');}
+else if(seg[0]==='projects'||seg[0]==='project'){key='portfolio';html=seg[1]?viewDetail('project',seg[1]):viewList('projects');}
 else if(seg[0]==='concepts'||seg[0]==='concept'){key='portfolio';html=seg[1]?viewDetail('concept',seg[1]):viewList('concepts');}
 else if(seg[0]==='stages'){key='stages';html=viewStages();}
 else if(seg[0]==='blog'){key='blog';html=seg[1]?viewPost(seg[1]):viewBlog();}
@@ -750,7 +735,6 @@ if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
 /* ================== СТАРТ ================== */
 (async function(){
 await loadContent();
-migrateSocials();
 renderChrome();
 route();
 addEventListener('hashchange',route);

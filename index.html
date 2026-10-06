@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v5 -->
+<!-- OSADE v6 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -82,7 +82,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .card:hover img{transform:scale(1.06)}
 .card h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-top:16px;transition:color .3s;line-height:1.35}
 .card:hover h3{color:var(--gold)}
-.card p{color:var(--muted);font-size:15.5px;margin-top:5px}
+.card p{color:var(--muted);font-size:15.5px;margin-top:5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .btn{display:inline-block;border:1px solid var(--gold);color:var(--ink);padding:14px 34px;font-family:var(--sans);font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:.3s}
 .btn:hover{background:var(--gold);color:#171106}
 .btn.small{padding:10px 22px;font-size:11px}
@@ -101,7 +101,7 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .thumbs img:hover{opacity:.85}
 .thumbs img.on{opacity:1;border-color:var(--gold)}
 .det-hint{color:#8f8676;font-size:13px;font-family:var(--sans);margin-top:14px}
-.story-title{font-family:var(--serif);font-size:clamp(20px,2.4vw,26px);margin:44px 0 4px;color:var(--gold)}
+.story-title{font-family:var(--serif);font-size:clamp(20px,2.4vw,26px);margin:48px 0 6px;color:var(--gold)}
 .others{margin-top:80px}
 .step{display:grid;grid-template-columns:1.05fr .95fr;gap:6%;align-items:center;padding:52px 0;border-top:1px solid var(--line)}
 .step.rev .step-txt{order:2}.step.rev .step-img{order:1}
@@ -241,18 +241,18 @@ photo:pic('osade-portrait',900,1100),
 text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
 projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
 items:[
-{id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',story:'',cover:pic('osade-p1-cover',1200,900),
+{id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',story:'',video:'',cover:pic('osade-p1-cover',1200,900),
 gallery:[pic('osade-p1-1',1600,1000),pic('osade-p1-2',1600,1000),pic('osade-p1-3',1600,1000),pic('osade-p1-4',1600,1000),pic('osade-p1-5',1600,1000)]},
-{id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',story:'',cover:pic('osade-p2-cover',1200,900),
+{id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',story:'',video:'',cover:pic('osade-p2-cover',1200,900),
 gallery:[pic('osade-p2-1',1600,1000),pic('osade-p2-2',1600,1000),pic('osade-p2-3',1600,1000),pic('osade-p2-4',1600,1000)]},
-{id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',story:'',cover:pic('osade-p3-cover',1200,900),
+{id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',story:'',video:'',cover:pic('osade-p3-cover',1200,900),
 gallery:[pic('osade-p3-1',1600,1000),pic('osade-p3-2',1600,1000),pic('osade-p3-3',1600,1000),pic('osade-p3-4',1600,1000),pic('osade-p3-5',1600,1000),pic('osade-p3-6',1600,1000)]}
 ]},
 concepts:{heading:'Концепции', lead:'Идеи и образы, которые ждут своего места — возможно, вашего.',
 items:[
-{id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',story:'',cover:pic('osade-c1-cover',1200,900),
+{id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',story:'',video:'',cover:pic('osade-c1-cover',1200,900),
 gallery:[pic('osade-c1-1',1600,1000),pic('osade-c1-2',1600,1000),pic('osade-c1-3',1600,1000)]},
-{id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',story:'',cover:pic('osade-c2-cover',1200,900),
+{id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',story:'',video:'',cover:pic('osade-c2-cover',1200,900),
 gallery:[pic('osade-c2-1',1600,1000),pic('osade-c2-2',1600,1000),pic('osade-c2-3',1600,1000)]}
 ]},
 stages:{heading:'Этапы работы', lead:'Путь от первой встречи до передачи ключей — спокойно, прозрачно, по шагам. Каждый текст и фото заменяются в разделе «Админ».',
@@ -359,7 +359,7 @@ addEventListener('scroll',()=>{$('#hdr').classList.toggle('solid',scrollY>30);})
 /* ================== СТРАНИЦЫ ================== */
 const app=()=>$('#app');
 function cardProject(p,kind){return `<a class="card" href="#/${kind}/${p.id}"><figure><img loading="lazy" src="${esc(p.cover)}" alt="${esc(p.title)}"></figure><h3>${esc(p.title)}</h3><p>${esc(p.short)}</p></a>`;}
-function cardPost(p){return `<a class="card" href="#/post/${p.id}"><figure class="fig-blog"><img loading="lazy" src="${esc(p.cover)}" alt="${esc(p.title)}"></figure><div class="post-date" style="margin-top:14px">${fmtDate(p.date)}</div><h3>${esc(p.title)}</h3></a>`;}
+function cardPost(p){return `<a class="card" href="#/blog/${p.id}"><figure class="fig-blog"><img loading="lazy" src="${esc(p.cover)}" alt="${esc(p.title)}"></figure><div class="post-date" style="margin-top:14px">${fmtDate(p.date)}</div><h3>${esc(p.title)}</h3></a>`;}
 
 function viewHome(){const s=C.site;return `
 <section class="hero" style="background-image:url('${esc(s.heroImg)}')">
@@ -405,11 +405,12 @@ return `<section class="page"><div class="container">
 <div class="overline">${esc(list.heading)}</div>
 <h1 class="sec-title" style="max-width:900px">${esc(it.title)}</h1>
 ${it.short?`<p class="lead">${esc(it.short)}</p>`:''}
-${(it.story&&it.story.trim())?`<h2 class="story-title">История проекта</h2><div class="prose">${paras(it.story)}</div>`:''}
 <figure class="det-fig"><img id="detMain" src="${esc(gal[0])}" alt="${esc(it.title)}" onclick="openLB(curGal,curIdx)">
 <div class="det-count" id="detCount">1 / ${gal.length}</div></figure>
 <div class="thumbs">${gal.map((u,i)=>`<img src="${esc(u)}" class="${i===0?'on':''}" onclick="detSwap(${i})" alt="${esc(it.title)} — фото ${i+1}">`).join('')}</div>
 <p class="det-hint">Нажмите на фото, чтобы открыть его крупно. Стрелки ← → листают.</p>
+${(it.story&&it.story.trim())?`<h2 class="story-title">История проекта</h2><div class="prose">${paras(it.story)}</div>`:''}
+${videoEmbed(it.video)}
 ${others.length?`<div class="others"><div class="overline">Смотрите также</div><div class="cards">${others.map(p=>cardProject(p,kind)).join('')}</div></div>`:''}
 </div></section>`;}
 function detSwap(i){curIdx=i;$('#detMain').src=curGal[i];$('#detCount').textContent=(i+1)+' / '+curGal.length;
@@ -509,7 +510,7 @@ return `<div class="admin-wrap">
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v5</span>
+<span class="ver-tag">OSADE v6</span>
 <button class="mini-btn add" onclick="exportJSON()">⬇ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -576,8 +577,9 @@ ${f('Обложка (заглавная картинка)',coverBlock(gp+'.cover
 <button class="danger" title="удалить" onclick="delItem('${list}',${i})">✕</button>
 </div>
 </div>
-${f('Краткое описание (одна строка — видно в списке под названием)',ta(gp+'.short',it.short,2))}
-${f('История проекта — большой текст на странице проекта (абзацы через пустую строку; можно оставить пустым)',ta(gp+'.story',it.story||'',6))}
+${f('Краткое описание — одна строка, видно в списке под названием (длинный текст пишите в «Истории проекта»)',ta(gp+'.short',it.short,2))}
+${f('История проекта — большой текст на странице проекта под галереей (абзацы через пустую строку; можно оставить пустым)',ta(gp+'.story',it.story||'',6))}
+${f('Видео по ссылке — YouTube, VK Видео или Rutube (необязательно)',inp(gp+'.video',it.video||'','https://...'))}
 ${f('Галерея страницы проекта — фото ('+gal.length+')',galleryEditor(list,i))}
 </div>`;}
 function galleryEditor(list,i){
@@ -605,8 +607,8 @@ function galAddFile(list,i,inp2){const file=inp2.files[0];if(!file)return;
 fileToDataURL(file).then(u=>{galArr(list,i).push(u);doSave();admTab(adminTab);});}
 function moveItem(list,i,d){const a=C[list].items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab(adminTab);}
 function delItem(list,i){const a=C[list].items;if(!confirm('Удалить «'+(a[i].title||'без названия')+'»?'))return;a.splice(i,1);doSave();admTab(adminTab);}
-function addProject(){C.projects.items.push({id:uid(),title:'Новый проект',short:'краткое описание',story:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
-function addConcept(){C.concepts.items.push({id:uid(),title:'Новая концепция',short:'краткое описание',story:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+function addProject(){C.projects.items.push({id:uid(),title:'Новый проект',short:'краткое описание',story:'',video:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
+function addConcept(){C.concepts.items.push({id:uid(),title:'Новая концепция',short:'краткое описание',story:'',video:'',cover:pic(uid(),1200,900),gallery:[pic(uid(),1600,1000)]});doSave();admTab(adminTab);}
 
 function tabStages(){return `
 ${f('Заголовок',inp('stages.heading',C.stages.heading))}
@@ -695,7 +697,8 @@ return `<div class="item-card">
 <label class="mini-btn">⬆ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint">Фото, загруженные кнопкой «Загрузить файл», вшиваются внутрь content.json без имени файла. Чтобы картинки попадали в поиск, важные обложки лучше загружать в GitHub в папку <b>images/</b> с осмысленным именем (например <b>images/akhuba-residence.jpg</b>) и добавлять их кнопкой «+ по ссылке».</p>
+<p class="hint">Фото, загруженные кнопкой «Загрузить файл», вшиваются внутрь content.json без имени файла. Чтобы картинки попадали в поиск, важные обложки лучше загружать в GitHub с осмысленным именем и добавлять кнопкой «+ по ссылке».</p>
+<p class="hint">Видео встраивается по ссылке (YouTube, VK Видео, Rutube) — загружать видеофайлы на сайт не нужно и не получится: они слишком тяжёлые.</p>
 ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
 function exportJSON(){
@@ -723,6 +726,7 @@ else if(seg[0]==='projects'||seg[0]==='project'){key='portfolio';html=seg[1]?vie
 else if(seg[0]==='concepts'||seg[0]==='concept'){key='portfolio';html=seg[1]?viewDetail('concept',seg[1]):viewList('concepts');}
 else if(seg[0]==='stages'){key='stages';html=viewStages();}
 else if(seg[0]==='blog'){key='blog';html=seg[1]?viewPost(seg[1]):viewBlog();}
+else if(seg[0]==='post'){key='blog';html=viewPost(seg[1]);}
 else if(seg[0]==='contacts'){key='contacts';html=viewContacts();}
 else if(seg[0]==='admin'){key='admin';html=viewAdmin();}
 else {html=viewHome();}
@@ -734,6 +738,8 @@ if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
 
 /* ================== СТАРТ ================== */
 (async function(){
+/* битые картинки — прячем, вместо них остаётся аккуратный тёмный фон */
+document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG'){e.target.style.visibility='hidden';}},true);
 await loadContent();
 renderChrome();
 route();

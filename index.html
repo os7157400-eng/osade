@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v6 -->
+<!-- OSADE v8 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -32,15 +32,15 @@ button{font-family:var(--sans);cursor:pointer;background:none;border:none;color:
 header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 4vw;transition:.35s}
 header.solid{background:rgba(13,11,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 4vw}
 .logo{font-family:var(--serif);font-size:25px;letter-spacing:6px;font-weight:600}
-nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
 nav a{font-family:var(--serif);font-size:16px;letter-spacing:.05em;opacity:.92;position:relative;padding:6px 0;white-space:nowrap}
 nav a:hover{color:var(--gold)}
 nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold)}
 .caret{font-size:11px;opacity:.7;margin-left:3px}
 .drop{position:relative}
-.drop-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(18,14,23,.97);border:1px solid var(--line);min-width:200px;padding:8px 0;display:none;flex-direction:column;backdrop-filter:blur(8px)}
+.drop-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(18,14,23,.97);border:1px solid var(--line);min-width:240px;padding:8px 0;display:none;flex-direction:column;backdrop-filter:blur(8px);z-index:55}
 .drop:hover .drop-menu{display:flex}
-.drop-menu a{display:block;padding:9px 22px;font-size:15px}
+.drop-menu a{display:block;padding:9px 22px;font-size:15px;white-space:nowrap}
 .right{display:flex;align-items:center;gap:16px}
 
 .soc{display:flex;gap:12px;align-items:center}
@@ -89,6 +89,16 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .btn.ghost{border-color:var(--line)}
 .btn.ghost:hover{border-color:var(--gold)}
 .post-date{font-family:var(--sans);font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
+
+.price-list{margin-top:44px;border-top:1px solid var(--line)}
+.price-list a{display:block;padding:26px 6px;border-bottom:1px solid var(--line);transition:.25s}
+.price-list a:hover{background:rgba(200,168,120,.05)}
+.price-list h3{font-family:var(--serif);font-weight:500;font-size:clamp(21px,2.2vw,27px);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.price-list h3::after{content:'→';color:var(--gold);opacity:0;transition:.25s;font-family:var(--sans)}
+.price-list a:hover h3::after{opacity:1}
+.price-list p{color:var(--muted);font-size:16px;margin-top:6px}
+.price-body{max-width:1000px;margin-top:36px}
+.price-body .prose p{font-size:18px;color:#e8e0d2;margin-bottom:18px}
 
 .page{padding:150px 0 90px;min-height:60vh}
 .crumb{display:inline-block;margin-bottom:24px;color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.08em}
@@ -177,6 +187,8 @@ textarea.inp:focus{outline:none;border-color:var(--gold)}
 .soc-ic{width:40px;display:grid;place-items:center;color:var(--gold)}
 .soc-ic svg{width:20px;height:20px;fill:currentColor}
 .ver-tag{font-family:var(--sans);font-size:12px;letter-spacing:.1em;border:1px solid var(--gold);color:var(--gold);padding:4px 10px}
+.chk{display:flex;align-items:center;gap:10px;margin:14px 0;font-family:var(--sans);font-size:14px;cursor:pointer}
+.chk input{width:auto;accent-color:var(--gold);cursor:pointer}
 
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1d1724;border:1px solid var(--gold);color:var(--ink);padding:12px 22px;font-family:var(--sans);font-size:13px;letter-spacing:.05em;opacity:0;pointer-events:none;transition:.35s;z-index:120;max-width:90vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%)}
@@ -238,24 +250,30 @@ socials:[
 ],
 about:{heading:'Обо мне',
 photo:pic('osade-portrait',900,1100),
-text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
+text:'Это заготовка текста — замените её на свою.',
+awards:{show:false,heading:'Мои достижения',images:[]}},
+price:{show:true,heading:'Цена',lead:'Прозрачные этапы и понятная стоимость — вы всегда знаете, за что платите.',
+items:[
+{id:'pe1',title:'Эскизный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\nЗамените этот текст в разделе «Админ → Цена». Абзацы разделяйте пустой строкой.'},
+{id:'pe2',title:'Концепция',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\nЗамените этот текст в разделе «Админ → Цена».'}
+]},
 projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
 items:[
 {id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',story:'',video:'',cover:pic('osade-p1-cover',1200,900),
-gallery:[pic('osade-p1-1',1600,1000),pic('osade-p1-2',1600,1000),pic('osade-p1-3',1600,1000),pic('osade-p1-4',1600,1000),pic('osade-p1-5',1600,1000)]},
+gallery:[pic('osade-p1-1',1600,1000),pic('osade-p1-2',1600,1000),pic('osade-p1-3',1600,1000)]},
 {id:'p2',title:'Гостевой дом «Лазурный двор»',short:'9 номеров и внутренний двор · Крым',story:'',video:'',cover:pic('osade-p2-cover',1200,900),
-gallery:[pic('osade-p2-1',1600,1000),pic('osade-p2-2',1600,1000),pic('osade-p2-3',1600,1000),pic('osade-p2-4',1600,1000)]},
+gallery:[pic('osade-p2-1',1600,1000),pic('osade-p2-2',1600,1000)]},
 {id:'p3',title:'Загородный комплекс «Тихая гавань»',short:'Отель, SPA и банный двор · Подмосковье',story:'',video:'',cover:pic('osade-p3-cover',1200,900),
-gallery:[pic('osade-p3-1',1600,1000),pic('osade-p3-2',1600,1000),pic('osade-p3-3',1600,1000),pic('osade-p3-4',1600,1000),pic('osade-p3-5',1600,1000),pic('osade-p3-6',1600,1000)]}
+gallery:[pic('osade-p3-1',1600,1000),pic('osade-p3-2',1600,1000)]}
 ]},
 concepts:{heading:'Концепции', lead:'Идеи и образы, которые ждут своего места — возможно, вашего.',
 items:[
 {id:'c1',title:'Бутик-отель в историческом особняке',short:'Концепция реконструкции · Санкт-Петербург',story:'',video:'',cover:pic('osade-c1-cover',1200,900),
-gallery:[pic('osade-c1-1',1600,1000),pic('osade-c1-2',1600,1000),pic('osade-c1-3',1600,1000)]},
+gallery:[pic('osade-c1-1',1600,1000),pic('osade-c1-2',1600,1000)]},
 {id:'c2',title:'Ретрит-центр у воды',short:'20 домиков, тишина и вода со всех сторон',story:'',video:'',cover:pic('osade-c2-cover',1200,900),
-gallery:[pic('osade-c2-1',1600,1000),pic('osade-c2-2',1600,1000),pic('osade-c2-3',1600,1000)]}
+gallery:[pic('osade-c2-1',1600,1000),pic('osade-c2-2',1600,1000)]}
 ]},
-stages:{heading:'Этапы работы', lead:'Путь от первой встречи до передачи ключей — спокойно, прозрачно, по шагам. Каждый текст и фото заменяются в разделе «Админ».',
+stages:{heading:'Этапы работы', lead:'Путь от первой встречи до передачи ключей — спокойно, прозрачно, по шагам.',
 steps:[
 {title:'Знакомство и бриф', text:'Встречаемся онлайн или лично. Обсуждаем задачу, участок или здание, бюджет и сроки. Я слушаю — много.', img:pic('osade-st1',1200,900)},
 {title:'Энергетика места', text:'Приезжаю на объект, сижу в тишине, смотрю свет, воду, ветер и историю места. Так рождается образ будущего гостеприимства.', img:pic('osade-st2',1200,900)},
@@ -266,11 +284,11 @@ steps:[
 blog:{heading:'Блог', lead:'Дневник практики: наблюдения, приёмы, философия пространства.',
 items:[
 {id:'b1',date:'2025-06-02',title:'Почему я начинаю каждый проект с тишины',cover:pic('osade-b1',1200,750),
-text:'Прежде чем взять в руку карандаш, я приезжаю на место и просто сижу.\n\nПолчаса без телефона. Слушаю, как звучит участок утром и вечером, откуда приходит свет, куда тянутся тропинки. Место всегда говорит — вопрос, научимся ли мы слышать.\n\nЭта практика родилась из моего увлечения эзотерикой, но работает вполне прагматично: решения, принятые «от места», почти не спорят с контекстом. Гости потом не могут объяснить, почему в отеле так спокойно.\n\nПопробуйте и вы: не спрашивайте участок, каков он. Спросите, каким он хочет быть.',
-images:[pic('osade-b1-1',1200,900),pic('osade-b1-2',1200,900)],video:''},
+text:'Прежде чем взять в руку карандаш, я приезжаю на место и просто сижу.',
+images:[],video:''},
 {id:'b2',date:'2025-07-14',title:'Пять приёмов, которые добавляют света гостевому дому',cover:pic('osade-b2',1200,750),
-text:'Свет — главный бесплатный материал в дизайне гостеприимства.\n\n1. Низкие тёплые светильники у кровати — гость чувствует себя дома.\n2. Контровой свет за растениями во дворе — силуэты вечером.\n3. Зеркало напротив окна в узком коридоре.\n4. Свечи на ресепшене — один жест, а атмосфера другая.\n5. Никакого холодного света в номерах. Никогда.',
-images:[pic('osade-b2-1',1200,900)],video:''}
+text:'Свет — главный бесплатный материал в дизайне гостеприимства.',
+images:[],video:''}
 ]},
 contacts:{heading:'Контакты', intro:'Заполните этот блок под себя в разделе «Админ → Контакты»: как и где с вами встретиться.',
 lines:['Работаю по России и за её пределами','Telegram / WhatsApp: +7 900 000-00-00','E-mail: hello@osade.ru','Встречи: онлайн или лично, по договорённости']}
@@ -315,6 +333,7 @@ let pick=null;
 if(published&&local)pick=((local.meta&&local.meta.updatedAt)||0)>=(published.meta&&published.meta.updatedAt||0)?local:published;
 else pick=local||published;
 C=pick?mergeDeep(structuredClone(DEFAULTS),pick):structuredClone(DEFAULTS);
+if(!C.price||!Array.isArray(C.price.items))C.price={show:true,heading:'Цена',lead:'',items:[]};
 }
 let saveT;
 function scheduleSave(){clearTimeout(saveT);saveT=setTimeout(doSave,400);}
@@ -335,19 +354,32 @@ const NAV=[
 {t:'Контакты',h:'#/contacts',k:'contacts'},
 {t:'Админ',h:'#/admin',k:'admin'}
 ];
+function priceOn(){return C.price&&C.price.show!==false;}
+function priceItems(){return (C.price&&C.price.items)||[];}
+function navWithPrice(){
+const arr=NAV.slice();
+if(priceOn()&&priceItems().length){
+arr.splice(4,0,{t:(C.price.heading||'Цена'),h:'#/price',k:'price',
+drop:priceItems().map(i=>({t:i.title||'Без названия',h:'#/price/'+i.id}))});
+}
+return arr;
+}
 function socialLinks(){return C.socials.map(s=>{const u=(s.url||'').trim();
 return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} title="${esc(s.name)}" class="${u?'':'off'}">${ICON[s.icon]||''}</a>`;}).join('');}
 function renderChrome(){
 $('#logoText').textContent=C.site.logoText;
 $('#socHdr').innerHTML=socialLinks();
-$('#navList').innerHTML=NAV.map(n=>n.drop
+const visNav=navWithPrice();
+$('#navList').innerHTML=visNav.map(n=>n.drop
 ?`<li class="drop"><a href="${n.h}" data-k="${n.k}">${n.t} <span class="caret">▾</span></a><div class="drop-menu">${n.drop.map(d=>`<a href="${d.h}">${d.t}</a>`).join('')}</div></li>`
 :`<li><a href="${n.h}" data-k="${n.k}">${n.t}</a></li>`).join('');
-$('#mnavList').innerHTML=[['#/','Главная'],['#/about','Обо мне'],['#/projects','Проекты'],['#/concepts','Концепции'],['#/stages','Этапы'],['#/blog','Блог'],['#/contacts','Контакты'],['#/admin','Админ']]
-.map(x=>`<a href="${x[0]}" onclick="closeMobile()">${x[1]}</a>`).join('');
+const mitems=[['#/','Главная'],['#/about','Обо мне'],['#/projects','Проекты'],['#/concepts','Концепции'],['#/stages','Этапы'],['#/blog','Блог']];
+if(priceOn())mitems.push(['#/price',C.price.heading||'Цена']);
+mitems.push(['#/contacts','Контакты'],['#/admin','Админ']);
+$('#mnavList').innerHTML=mitems.map(x=>`<a href="${x[0]}" onclick="closeMobile()">${x[1]}</a>`).join('');
 $('#mnavSoc').innerHTML=socialLinks();
 $('#ftr').innerHTML=`<div class="f-logo">${esc(C.site.logoText)}</div>
-<div class="f-nav">${NAV.filter(n=>n.k!=='admin').map(n=>`<a href="${n.h}">${n.t}</a>`).join('')}</div>
+<div class="f-nav">${visNav.filter(n=>n.k!=='admin').map(n=>`<a href="${n.h}">${n.t}</a>`).join('')}</div>
 <div class="soc">${socialLinks()}</div>
 <div class="f-copy">© ${new Date().getFullYear()} ${esc(C.site.footer)}</div>`;
 }
@@ -416,6 +448,26 @@ ${others.length?`<div class="others"><div class="overline">Смотрите та
 function detSwap(i){curIdx=i;$('#detMain').src=curGal[i];$('#detCount').textContent=(i+1)+' / '+curGal.length;
 document.querySelectorAll('.thumbs img').forEach((t,j)=>t.classList.toggle('on',j===i));}
 
+/* ---------- ЦЕНА ---------- */
+function viewPrice(){const p=C.price||{};const items=priceItems();
+return `<section class="page"><div class="container">
+<div class="overline">Стоимость услуг</div>
+<h1 class="sec-title">${esc(p.heading||'Цена')}</h1>
+${p.lead?`<p class="lead">${esc(p.lead)}</p>`:''}
+${items.length?`<div class="price-list">${items.map(it=>`<a href="#/price/${it.id}"><h3>${esc(it.title||'Без названия')}</h3>${firstLine(it.text)?`<p>${esc(firstLine(it.text))}</p>`:''}</a>`).join('')}</div>`
+:`<p class="hint">Подразделы пока не добавлены.</p>`}
+</div></section>`;}
+function firstLine(t){const s=String(t||'').split(/\n/).find(x=>x.trim());return s?s.trim().slice(0,140):'';}
+function viewPriceItem(id){const items=priceItems();
+let it=items.find(x=>x.id===id);if(!it)it=items[0];
+if(!it)return viewPrice();
+return `<section class="page"><div class="container">
+<a class="crumb" href="#/price">← Все подразделы</a>
+<div class="overline">${esc((C.price&&C.price.heading)||'Цена')}</div>
+<h1 class="sec-title">${esc(it.title||'Без названия')}</h1>
+<div class="price-body"><div class="prose">${paras(it.text)}</div></div>
+</div></section>`;}
+
 function viewStages(){const st=C.stages;return `
 <section class="page"><div class="container">
 <div class="overline">Как я работаю</div>
@@ -440,6 +492,8 @@ function videoEmbed(u){if(!u)return'';let m;
 if(m=u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/))return `<div class="video"><iframe src="https://www.youtube.com/embed/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
 if(m=u.match(/rutube\.ru\/video\/([\w]{6,})/))return `<div class="video"><iframe src="https://rutube.ru/play/embed/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
 if(m=u.match(/vk\.com\/video(-?\d+)_(\d+)/))return `<div class="video"><iframe src="https://vk.com/video_ext.php?oid=${m[1]}&id=${m[2]}&hd=2" allowfullscreen loading="lazy"></iframe></div>`;
+if(m=u.match(/vimeo\.com\/(?:video\/)?(\d{7,})/))return `<div class="video"><iframe src="https://player.vimeo.com/video/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
+if(m=u.match(/dzen\.ru\/embed\/(v[\w]+)/))return `<div class="video"><iframe src="https://dzen.ru/embed/${m[1]}" allowfullscreen loading="lazy"></iframe></div>`;
 return `<p class="hint"><a href="${esc(u)}" target="_blank" rel="noopener" style="color:var(--gold)">Смотреть видео →</a></p>`;}
 
 function viewPost(id){const p=C.blog.items.find(x=>x.id===id);if(!p)return viewBlog();return `
@@ -453,7 +507,8 @@ ${videoEmbed(p.video)}
 ${(p.images&&p.images.length)?`<div class="post-imgs">${p.images.map((u,i)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.blog.items.find(x=>x.id==='${p.id}').images,${i})" alt="${esc(p.title)}">`).join('')}</div>`:''}
 </div></section>`;}
 
-function viewAbout(){return `
+function viewAbout(){const aw=C.about.awards||{};const awIm=aw.images||[];
+return `
 <section class="page"><div class="container">
 <div class="overline">${esc(C.site.logoText)}</div>
 <h1 class="sec-title">${esc(C.about.heading)}</h1>
@@ -461,6 +516,8 @@ function viewAbout(){return `
 <figure><img src="${esc(C.about.photo)}" alt="Портрет"></figure>
 <div class="prose">${paras(C.about.text)}</div>
 </div>
+${aw.show&&awIm.length?`<h2 class="story-title" style="margin-top:56px">${esc(aw.heading||'Мои достижения')}</h2>
+<div class="post-imgs">${awIm.map((u,i)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.about.awards.images,${i})" alt="Диплом или награда ${i+1}">`).join('')}</div>`:''}
 </div></section>`;}
 
 function viewContacts(){return `
@@ -485,7 +542,7 @@ function closeLB(){$('#modalRoot').innerHTML='';}
 document.addEventListener('keydown',e=>{if($('#modalRoot').innerHTML){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1);}});
 
 /* ================== АДМИНКА ================== */
-const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'pub',t:'Публикация'}];
+const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'price',t:'Цена'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'pub',t:'Публикация'}];
 let adminTab='main',portKind='projects';
 const f=(l,c)=>`<div class="f-label">${l}</div>${c}`;
 const inp=(p,v,ph)=>`<input class="inp" value="${esc(v)}" placeholder="${esc(ph||'')}" oninput="upd('${p}',this.value)">`;
@@ -510,7 +567,7 @@ return `<div class="admin-wrap">
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v6</span>
+<span class="ver-tag">OSADE v8</span>
 <button class="mini-btn add" onclick="exportJSON()">⬇ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -524,8 +581,8 @@ function admTab(t){adminTab=t;document.querySelectorAll('.admin-nav button').for
 const b=$('#admBody');if(b)b.innerHTML=renderTab(t);}
 function renderTab(t){switch(t){
 case 'main':return tabMain();case 'about':return tabAbout();case 'portfolio':return tabPortfolio();
-case 'stages':return tabStages();case 'blog':return tabBlog();case 'contacts':return tabContacts();
-case 'socials':return tabSocials();case 'pub':return tabPub();}return '';}
+case 'stages':return tabStages();case 'blog':return tabBlog();case 'price':return tabPrice();
+case 'contacts':return tabContacts();case 'socials':return tabSocials();case 'pub':return tabPub();}return '';}
 
 function tabMain(){return `
 ${f('Текст логотипа (в левом верхнем углу)',inp('site.logoText',C.site.logoText))}
@@ -543,13 +600,39 @@ ${f('Строка в подвале (после © и года)',inp('site.foote
 </div>`;}
 function setPwd(){const a=$('#pw1').value,b=$('#pw2').value;
 if(a.length<4)return toast('Пароль — от 4 символов');if(a!==b)return toast('Пароли не совпадают');
-localStorage.setItem(LS_PWD,a);$('#pw1').value='';$('#pw2').value='';toast('Пароль обновлён');}
+localStorage.setItem(LS_PWD,a);$('#pw1').value='';$('#pw2').value='';toast('Пароль обновлён — запишите его!');}
 
-function tabAbout(){return `
+function tabAbout(){const aw=C.about.awards||{};
+return `
 <p class="hint">Здесь ваше фото и рассказ о себе. Абзацы разделяйте пустой строкой.</p>
 ${f('Портретное фото (лучше вертикальное)',coverBlock('about.photo',C.about.photo))}
 ${f('Заголовок страницы',inp('about.heading',C.about.heading))}
-${f('Текст',ta('about.text',C.about.text,12))}`;}
+${f('Текст',ta('about.text',C.about.text,12))}
+<div class="f-label">Блок «Достижения» — дипломы и награды</div>
+<label class="chk"><input type="checkbox" ${aw.show?'checked':''} onchange="upd('about.awards.show',this.checked)">Показывать блок достижений на странице «Обо мне»</label>
+<p class="hint">Пока галочка снята, блок невидим для посетителей. Наполните фото — и включите.</p>
+${f('Заголовок блока',inp('about.awards.heading',aw.heading||'Мои достижения'))}
+${awardEditor()}`;}
+function awardEditor(){
+const arr=(C.about.awards&&C.about.awards.images)||[];
+const items=arr.map((u,j)=>`<div class="g-item">
+<img src="${esc(u)}" onclick="openLB(C.about.awards.images,${j})" alt="">
+<div class="g-ctl">
+<button onclick="awMove(${j},-1)">↑</button>
+<button onclick="awMove(${j},1)">↓</button>
+<button class="danger" onclick="awDel(${j})">✕</button>
+</div></div>`).join('');
+return `<div class="g-grid">${items||'<span class="hint">Пока пусто</span>'}</div>
+<div class="f-row" style="flex-wrap:wrap">
+<input class="inp" id="awurl" placeholder="ссылка на фото (https://...)" style="max-width:340px">
+<button class="mini-btn" onclick="awAddUrl()">+ по ссылке</button>
+<label class="mini-btn">+ загрузить файл<input type="file" accept="image/*" hidden onchange="awAddFile(this)"></label>
+</div>`;}
+function awArr(){C.about.awards=C.about.awards||{show:false,heading:'Мои достижения',images:[]};C.about.awards.images=C.about.awards.images||[];return C.about.awards.images;}
+function awMove(j,d){const a=awArr(),k=j+d;if(k<0||k>=a.length)return;[a[j],a[k]]=[a[k],a[j]];doSave();admTab('about');}
+function awDel(j){if(!confirm('Удалить фото?'))return;awArr().splice(j,1);doSave();admTab('about');}
+function awAddUrl(){const el=document.getElementById('awurl');const u=(el.value||'').trim();if(!u)return toast('Вставьте ссылку на фото');awArr().push(u);doSave();admTab('about');}
+function awAddFile(inp2){const file=inp2.files[0];if(!file)return;fileToDataURL(file).then(u=>{awArr().push(u);doSave();admTab('about');});}
 
 function setPort(k){portKind=k;admTab('portfolio');}
 function tabPortfolio(){
@@ -579,7 +662,7 @@ ${f('Обложка (заглавная картинка)',coverBlock(gp+'.cover
 </div>
 ${f('Краткое описание — одна строка, видно в списке под названием (длинный текст пишите в «Истории проекта»)',ta(gp+'.short',it.short,2))}
 ${f('История проекта — большой текст на странице проекта под галереей (абзацы через пустую строку; можно оставить пустым)',ta(gp+'.story',it.story||'',6))}
-${f('Видео по ссылке — YouTube, VK Видео или Rutube (необязательно)',inp(gp+'.video',it.video||'','https://...'))}
+${f('Видео по ссылке — VK Видео, Rutube, Дзен, Vimeo (необязательно)',inp(gp+'.video',it.video||'','https://...'))}
 ${f('Галерея страницы проекта — фото ('+gal.length+')',galleryEditor(list,i))}
 </div>`;}
 function galleryEditor(list,i){
@@ -653,10 +736,34 @@ ${f('Обложка',coverBlock(gp+'.cover',p.cover))}
 </div>
 </div>
 ${f('Текст поста (абзацы — через пустую строку)',ta(gp+'.text',p.text,8))}
-${f('Видео по ссылке (YouTube, VK Видео или Rutube) — необязательно',inp(gp+'.video',p.video||'','https://...'))}
+${f('Видео по ссылке — VK Видео, Rutube, Дзен, Vimeo (необязательно)',inp(gp+'.video',p.video||'','https://...'))}
 ${f('Фото в посте ('+((p.images||[]).length)+')',galleryEditor('blog',i))}
 </div>`;}).join('')}`;}
 function addPost(){C.blog.items.unshift({id:uid(),date:new Date().toISOString().slice(0,10),title:'Новый пост',cover:pic(uid(),1200,750),text:'',images:[],video:''});doSave();admTab(adminTab);}
+
+function tabPrice(){C.price=C.price||{show:true,heading:'Цена',lead:'',items:[]};
+C.price.items=C.price.items||[];
+return `
+<label class="chk"><input type="checkbox" ${C.price.show!==false?'checked':''} onchange="upd('price.show',this.checked)">Показывать раздел «Цена» в меню сайта</label>
+<p class="hint">Каждый подраздел — отдельная страница с широким текстом. Подразделы появляются в меню «Цена» выпадающим списком. Добавляйте и удаляйте сколько нужно.</p>
+${f('Заголовок раздела',inp('price.heading',C.price.heading))}
+${f('Подводка (строка под заголовком; можно оставить пустой)',ta('price.lead',C.price.lead||'',2))}
+<div class="f-row" style="margin:10px 0 16px"><button class="mini-btn add" onclick="addPrice()">+ Добавить подраздел</button></div>
+${C.price.items.map((it,i)=>{const p='price.items.'+i;return `<div class="item-card">
+<div class="f-row" style="align-items:flex-start">
+<div class="grow">
+${f('Название подраздела '+(i+1)+' — станет пунктом меню «Цена»',inp(p+'.title',it.title))}
+${f('Текст подраздела — расчёты, формулы, пояснения (абзацы через пустую строку)',ta(p+'.text',it.text,14))}
+</div>
+<div class="v-btns">
+<button onclick="movePrice(${i},-1)">↑</button>
+<button onclick="movePrice(${i},1)">↓</button>
+<button class="danger" onclick="delPrice(${i})">✕</button>
+</div>
+</div></div>`;}).join('')}`;}
+function addPrice(){C.price.items.push({id:uid(),title:'Новый подраздел',text:''});doSave();admTab('price');renderChrome();}
+function movePrice(i,d){const a=C.price.items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab('price');renderChrome();}
+function delPrice(i){if(!confirm('Удалить подраздел «'+(C.price.items[i].title||'')+'»?'))return;C.price.items.splice(i,1);doSave();admTab('price');renderChrome();}
 
 function tabContacts(){return `
 <p class="hint">Всё здесь — обычный текст, пишите как удобно: адрес, телефон, почта, условия встреч.</p>
@@ -679,7 +786,7 @@ ${SOC_LIST.map(o=>`<option value="${o}" ${s.icon===o?'selected':''}>${SOC_NAMES[
 <button class="mini-btn danger" onclick="delSoc(${i})">✕</button>
 </div></div>`).join('')}
 <button class="mini-btn" onclick="addSoc()">+ ещё кнопка</button>
-<p class="hint" style="margin-top:14px">Примеры: ВК для сообщений — <b>https://vk.me/ваш_id</b> (проверьте: Настройки → Приватность → Сообщения → «Все») · Telegram — <b>https://t.me/ник</b> · MAX — <b>https://max.ru/u/код</b></p>`;}
+<p class="hint" style="margin-top:14px">Примеры: ВК для сообщений — <b>https://vk.me/ваш_id</b> · Telegram — <b>https://t.me/ник</b> · MAX — <b>https://max.ru/u/код</b></p>`;}
 function addSoc(){C.socials.push({icon:'max',name:'MAX',url:''});doSave();admTab('socials');}
 function delSoc(i){if(!confirm('Удалить эту кнопку?'))return;C.socials.splice(i,1);doSave();admTab('socials');}
 
@@ -697,8 +804,8 @@ return `<div class="item-card">
 <label class="mini-btn">⬆ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint">Фото, загруженные кнопкой «Загрузить файл», вшиваются внутрь content.json без имени файла. Чтобы картинки попадали в поиск, важные обложки лучше загружать в GitHub с осмысленным именем и добавлять кнопкой «+ по ссылке».</p>
-<p class="hint">Видео встраивается по ссылке (YouTube, VK Видео, Rutube) — загружать видеофайлы на сайт не нужно и не получится: они слишком тяжёлые.</p>
+<p class="hint">Фото по ссылкам (загруженные в GitHub с осмысленным именем) лучше для поиска, чем вшитые файлы.</p>
+<p class="hint">Видео встраивается по ссылке: VK Видео, Rutube, Дзен, Vimeo, YouTube. Видеофайлы на сайт не загружаются — они слишком тяжёлые.</p>
 ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
 function exportJSON(){
@@ -709,7 +816,9 @@ document.body.appendChild(a);a.click();a.remove();
 toast('Файл скачан. Загрузите его на GitHub — шаги выше.');}
 function importJSON(inp2){const fl=inp2.files[0];if(!fl)return;const r=new FileReader();
 r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.site)throw 0;
-C=mergeDeep(structuredClone(DEFAULTS),j);doSave();renderChrome();admTab('pub');toast('Контент загружен из файла');
+C=mergeDeep(structuredClone(DEFAULTS),j);
+if(!C.price||!Array.isArray(C.price.items))C.price={show:true,heading:'Цена',lead:'',items:[]};
+doSave();renderChrome();admTab('pub');toast('Контент загружен из файла');
 }catch(e){toast('Не удалось прочитать файл');}};r.readAsText(fl);}
 function resetAll(){if(!confirm('Удалить все правки и вернуть демо-контент?'))return;
 localStorage.removeItem(LS_KEY);C=structuredClone(DEFAULTS);renderChrome();admTab('main');toast('Возвращён демо-контент');}
@@ -727,6 +836,7 @@ else if(seg[0]==='concepts'||seg[0]==='concept'){key='portfolio';html=seg[1]?vie
 else if(seg[0]==='stages'){key='stages';html=viewStages();}
 else if(seg[0]==='blog'){key='blog';html=seg[1]?viewPost(seg[1]):viewBlog();}
 else if(seg[0]==='post'){key='blog';html=viewPost(seg[1]);}
+else if(seg[0]==='price'){key='price';html=seg[1]?viewPriceItem(seg[1]):viewPrice();}
 else if(seg[0]==='contacts'){key='contacts';html=viewContacts();}
 else if(seg[0]==='admin'){key='admin';html=viewAdmin();}
 else {html=viewHome();}
@@ -738,7 +848,6 @@ if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
 
 /* ================== СТАРТ ================== */
 (async function(){
-/* битые картинки — прячем, вместо них остаётся аккуратный тёмный фон */
 document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG'){e.target.style.visibility='hidden';}},true);
 await loadContent();
 renderChrome();

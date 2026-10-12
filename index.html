@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v15 -->
+<!-- OSADE v16 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -99,19 +99,6 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .btn.ghost:hover{border-color:var(--gold)}
 .post-date{font-family:var(--sans);font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
 
-.price-list{margin-top:44px;border-top:1px solid var(--line)}
-.price-list a{display:block;padding:26px 6px;border-bottom:1px solid var(--line);transition:.25s}
-.price-list a:hover{background:rgba(200,168,120,.05)}
-.price-list h3{font-family:var(--serif);font-weight:500;font-size:clamp(21px,2.2vw,27px);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.price-list h3::after{content:'→';color:var(--gold);opacity:0;transition:.25s;font-family:var(--sans)}
-.price-list a:hover h3::after{opacity:1}
-.price-list p{color:var(--muted);font-size:16px;margin-top:6px}
-.price-body{margin-top:30px}
-.price-body p{font-size:18.5px;color:#e8e0d2;margin:0 0 18px}
-.p-h{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--gold);margin:26px 0 10px}
-.p-list{margin:0 0 18px;padding-left:22px}
-.p-list li{font-size:18.5px;color:#e8e0d2;margin-bottom:6px}
-
 .page{padding:150px 0 90px;min-height:60vh}
 .crumb{display:inline-block;margin-bottom:24px;color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.08em}
 .crumb:hover{color:var(--gold)}
@@ -199,8 +186,6 @@ textarea.inp:focus{outline:none;border-color:var(--gold)}
 .soc-ic{width:40px;display:grid;place-items:center;color:var(--gold)}
 .soc-ic svg{width:20px;height:20px;fill:currentColor}
 .ver-tag{font-family:var(--sans);font-size:12px;letter-spacing:.1em;border:1px solid var(--gold);color:var(--gold);padding:4px 10px}
-.chk{display:flex;align-items:center;gap:10px;margin:14px 0;font-family:var(--sans);font-size:14px;cursor:pointer}
-.chk input{width:auto;accent-color:var(--gold);cursor:pointer}
 
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1d1724;border:1px solid var(--gold);color:var(--ink);padding:12px 22px;font-family:var(--sans);font-size:13px;letter-spacing:.05em;opacity:0;pointer-events:none;transition:.35s;z-index:120;max-width:90vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%)}
@@ -244,7 +229,7 @@ header .right .soc{display:none}
 
 <script>
 /* ================== ДЕМО-КОНТЕНТ (всё меняется через Админ) ================== */
-/* Заглушки-картинки рисуются самим сайтом (SVG) — никаких внешних сервисов, работают всегда и везде */
+/* Заглушки-картинки рисуются самим сайтом (SVG) — работают всегда и везде */
 const pic=(s,w=1200,h=900)=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#171219"/><rect x="10" y="10" width="${w-20}" height="${h-20}" fill="none" stroke="rgba(200,168,120,.4)"/><text x="${w/2}" y="${h/2}" fill="#c8a878" font-family="Georgia,serif" font-size="${Math.max(20,Math.round(h/16))}" letter-spacing="12" text-anchor="middle" dominant-baseline="middle">OSADE</text></svg>`);
 const DEFAULTS={
 meta:{updatedAt:0},
@@ -266,11 +251,6 @@ socials:[
 about:{heading:'Обо мне',
 photo:pic('osade-portrait',900,1100),
 text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
-price:{show:true,heading:'Цена',lead:'Прозрачные этапы и понятная стоимость — вы всегда знаете, за что платите.',
-items:[
-{id:'pe1',title:'Эскизный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\n## Формула расчёта\nСтоимость = S × C × К\nгде S — площадь объекта, м²\n\nЗамените этот текст в панели редактирования (вкладка «Цена»). Пустая строка — новый абзац, строка с ## — подзаголовок, строка с «- » — список.',gallery:[]},
-{id:'pe2',title:'Концептуальный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\n## Формула расчёта\nСтоимость = S × C × К\nгде S — площадь объекта, м²\n\nЗамените этот текст в панели редактирования (вкладка «Цена»).',gallery:[]}
-]},
 projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
 items:[
 {id:'p1',title:'Отель «Северное сияние»',short:'Бутик-отель на 12 номеров · Карелия',story:'',video:'',cover:pic('osade-p1-cover',1200,900),
@@ -316,22 +296,6 @@ const isObj=x=>x&&typeof x==='object'&&!Array.isArray(x);
 function mergeDeep(b,o){for(const k in o){if(isObj(o[k])&&isObj(b[k]))mergeDeep(b[k],o[k]);else b[k]=o[k];}return b;}
 function setPath(o,p,v){const ks=p.split('.');let t=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];t=isNaN(k)?t[k]:t[+k];}const l=ks[ks.length-1];if(isNaN(l))t[l]=v;else t[+l]=v;}
 const paras=t=>String(t||'').replace(/\r\n?/g,'\n').split(/\n{2,}/).filter(p=>p.trim()).map(p=>'<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>').join('');
-/* Богатый текст: пустая строка = абзац, ## = подзаголовок, «- » = список, одиночный Enter = перенос */
-function richParas(t){
-const norm=String(t||'').replace(/\r\n?/g,'\n');
-return norm.split(/\n{2,}/).filter(b=>b.trim()).map(block=>{
-const lines=block.split('\n').map(x=>x.trim()).filter(Boolean);
-let out='',listOpen=false,para=[];
-const flush=()=>{if(para.length){out+='<p>'+para.map(esc).join('<br>')+'</p>';para=[];}};
-const closeL=()=>{if(listOpen){out+='</ul>';listOpen=false;}};
-lines.forEach(line=>{
-if(/^##+/.test(line)){flush();closeL();out+='<h3 class="p-h">'+esc(line.replace(/^#+\s*/,''))+'</h3>';}
-else if(/^[-•]\s+/.test(line)){flush();if(!listOpen){out+='<ul class="p-list">';listOpen=true;}out+='<li>'+esc(line.replace(/^[-•]\s+/,''))+'</li>';}
-else{closeL();para.push(line);}
-});
-flush();closeL();
-return out;}).join('');
-}
 function fmtDate(d){try{return new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})}catch(e){return esc(d)}}
 function subHtml(s){return esc(s).split('*').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${x}</span>`).join('<i class="star">✳</i>')}
 let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
@@ -357,19 +321,15 @@ const LS_KEY='osade_content_v1';
 /* ПАРОЛЬ АДМИНИСТРАТОРА. Чтобы сменить: замените текст в кавычках и загрузите обновлённый index.html на GitHub. */
 const PWD='osade2026_olgas78';
 let C=null;
-function normalizePrice(){
-if(!C.price||!Array.isArray(C.price.items))C.price={show:true,heading:'Цена',lead:'',items:[]};
-C.price.items.forEach(it=>{if(!Array.isArray(it.gallery))it.gallery=[];if(typeof it.text!=='string')it.text='';if(typeof it.title!=='string')it.title='';});
-}
-function applyContent(data){C=data;normalizePrice();renderChrome();route();
+function applyContent(data){C=data;renderChrome();route();
 if((location.hash||'').startsWith('#/admin')&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);}
 async function loadContent(){
-/* 1) мгновенная отрисовка из памяти браузера или заготовок — чёрного экрана больше нет */
+/* 1) мгновенная отрисовка из памяти браузера или заготовок — чёрного экрана нет */
 let local=null;try{const ls=JSON.parse(localStorage.getItem(LS_KEY));if(ls&&ls.site)local=ls;}catch(e){}
 applyContent(local?mergeDeep(structuredClone(DEFAULTS),local):structuredClone(DEFAULTS));
-/* 2) заставка убирается максимум через 2.5с, даже если интернет медленный */
+/* 2) заставка убирается максимум через 2.5с */
 const cap=setTimeout(hideVeil,2500);
-/* 3) в фоне тихо догружаем опубликованный контент и подменяем, если он новее */
+/* 3) в фоне догружаем опубликованный контент, если он новее */
 try{
 const r=await fetch('content.json');
 if(r.ok){const j=JSON.parse(await r.text());
@@ -387,7 +347,7 @@ C.meta=C.meta||{};C.meta.updatedAt=Date.now();
 try{localStorage.setItem(LS_KEY,JSON.stringify(C));}catch(e){toast('Память браузера переполнена — используйте фото по ссылкам');}
 const s=$('#saveState');if(s){s.textContent='Сохранено ✓';setTimeout(()=>{if(s.textContent==='Сохранено ✓')s.textContent='';},1600);}
 }
-function upd(path,v){setPath(C,path,v);scheduleSave();if(path==='site.logoText')$('#logoText').textContent=v;if(path==='price.show'||path==='price.heading')renderChrome();}
+function upd(path,v){setPath(C,path,v);scheduleSave();if(path==='site.logoText')$('#logoText').textContent=v;}
 function uploadTo(path,inp){const f=inp.files[0];if(!f)return;toast('Обрабатываю фото...');fileToDataURL(f).then(u=>{setPath(C,path,u);doSave();admTab(adminTab);});}
 
 /* ================== ШАПКА / ПОДВАЛ ================== */
@@ -398,29 +358,20 @@ const NAV_BASE=[
 {t:'Блог',h:'#/blog',k:'blog'},
 {t:'Контакты',h:'#/contacts',k:'contacts'}
 ];
-function priceOn(){return C.price&&C.price.show!==false;}
-function navAll(){
-if(!priceOn())return NAV_BASE.slice();
-const a=NAV_BASE.slice();a.splice(4,0,{t:C.price.heading||'Цена',h:'#/price',k:'price'});
-return a;
-}
 function socialLinks(){return C.socials.map(s=>{const u=(s.url||'').trim();
 return `<a href="${u?esc(u):'#'}" ${u?'target="_blank" rel="noopener"':''} title="${esc(s.name)}" class="${u?'':'off'}">${ICON[s.icon]||''}</a>`;}).join('');}
 function renderChrome(){
  $('#logoText').textContent=C.site.logoText;
  $('#socHdr').innerHTML=socialLinks();
-const visNav=navAll();
- $('#navList').innerHTML=visNav.map(n=>n.drop
+ $('#navList').innerHTML=NAV_BASE.map(n=>n.drop
 ?`<li class="drop"><a href="${n.h}" data-k="${n.k}">${n.t} <span class="caret">▼</span></a><div class="drop-menu">${n.drop.map(d=>`<a href="${d.h}">${d.t}</a>`).join('')}</div></li>`
 :`<li><a href="${n.h}" data-k="${n.k}">${n.t}</a></li>`).join('');
-const mitems=[['#/','Главная'],['#/about','Обо мне'],['#/projects','Проекты'],['#/concepts','Концепции'],['#/stages','Этапы'],['#/blog','Блог']];
-if(priceOn())mitems.push(['#/price',C.price.heading||'Цена']);
-mitems.push(['#/contacts','Контакты']);
+const mitems=[['#/','Главная'],['#/about','Обо мне'],['#/projects','Проекты'],['#/concepts','Концепции'],['#/stages','Этапы'],['#/blog','Блог'],['#/contacts','Контакты']];
  $('#mnavList').innerHTML=mitems.map(x=>`<a href="${x[0]}" onclick="closeMobile()">${x[1]}</a>`).join('');
  $('#mnavSoc').innerHTML=socialLinks();
  $('#ftr').innerHTML=`
 <div class="f-logo">${esc(C.site.logoText)}</div>
-<div class="f-nav">${navAll().map(n=>`<a href="${n.h}">${n.t}</a>`).join('')}</div>
+<div class="f-nav">${NAV_BASE.map(n=>`<a href="${n.h}">${n.t}</a>`).join('')}</div>
 <div class="soc">${socialLinks()}</div>
 <div class="f-copy">© ${new Date().getFullYear()} ${esc(C.site.footer)}</div>`;
 }
@@ -544,32 +495,6 @@ function viewContacts(){return `
 <div class="soc-big">${C.socials.filter(s=>(s.url||'').trim()).map(s=>`<a class="btn small soc-btn" href="${esc(s.url)}" target="_blank" rel="noopener">${ICON[s.icon]||''}<span>${esc(s.name)}</span></a>`).join('')}</div>
 </div></section>`;}
 
-/* ===== СТРАНИЦЫ «ЦЕНА» ===== */
-function pricePreview(t){const s=String(t||'').replace(/\r/g,'').split('\n').map(x=>x.trim()).filter(x=>x&&!/^##/.test(x)&&!/^[-•]\s/.test(x))[0]||'';return s.length>150?s.slice(0,150)+'…':s;}
-function viewPriceList(){return `
-<section class="page"><div class="container">
-<div class="overline">Стоимость услуг</div>
-<h1 class="sec-title">${esc(C.price.heading||'Цена')}</h1>
-<p class="lead">${esc(C.price.lead||'')}</p>
- ${C.price.items.length?`<div class="price-list">${C.price.items.map(it=>`
-<a href="#/price/${it.id}"><h3>${esc(it.title)}</h3>${pricePreview(it.text)?`<p>${esc(pricePreview(it.text))}</p>`:''}</a>`).join('')}</div>`
-:`<p class="hint" style="margin-top:30px">Разделы пока не добавлены — их можно создать в панели редактирования.</p>`}
-</div></section>`;}
-function viewPriceDetail(id){
-if(!priceOn())return viewHome();
-const it=C.price.items.find(x=>x.id===id);
-if(!it)return viewPriceList();
-const others=C.price.items.filter(x=>x.id!==it.id);
-const gal=it.gallery||[];
-return `<section class="page"><div class="container narrow2">
-<a class="crumb" href="#/price">← ${esc(C.price.heading||'Цена')}</a>
-<div class="overline">Стоимость услуг</div>
-<h1 class="sec-title">${esc(it.title)}</h1>
-<div class="price-body">${richParas(it.text)}</div>
- ${gal.length?`<div class="post-imgs">${gal.map((u,j)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.price.items.find(x=>x.id==='${it.id}').gallery,${j})" alt="${esc(it.title)}">`).join('')}</div>`:''}
- ${others.length?`<div class="others"><div class="overline">Смотрите также</div><div class="price-list">${others.map(o=>`<a href="#/price/${o.id}"><h3>${esc(o.title)}</h3></a>`).join('')}</div></div>`:''}
-</div></section>`;}
-
 /* ================== ЛАЙТБОКС ================== */
 function openLB(gal,i){curGal=gal||[];curIdx=i||0;if(!curGal.length)return;renderLB();}
 function renderLB(){$('#modalRoot').innerHTML=`<div class="lb" onclick="if(event.target===this)closeLB()">
@@ -583,7 +508,7 @@ function closeLB(){$('#modalRoot').innerHTML='';}
 document.addEventListener('keydown',e=>{if($('#modalRoot').innerHTML){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1);}});
 
 /* ================== АДМИНКА ================== */
-const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'price',t:'Цена'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'photos',t:'Фото-файлы'},{k:'pub',t:'Публикация'}];
+const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'photos',t:'Фото-файлы'},{k:'pub',t:'Публикация'}];
 let adminTab='main',portKind='projects';
 const f=(l,c)=>`<div class="f-label">${l}</div>${c}`;
 const inp=(p,v,ph)=>`<input class="inp" value="${esc(v)}" placeholder="${esc(ph||'')}" oninput="upd('${p}',this.value)">`;
@@ -608,7 +533,7 @@ return `<div class="admin-wrap">
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v15</span>
+<span class="ver-tag">OSADE v16</span>
 <button class="mini-btn add" onclick="exportJSON()">↓ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -622,7 +547,7 @@ function admTab(t){adminTab=t;document.querySelectorAll('.admin-nav button').for
 const b=$('#admBody');if(b)b.innerHTML=renderTab(t);}
 function renderTab(t){switch(t){
 case 'main':return tabMain();case 'about':return tabAbout();case 'portfolio':return tabPortfolio();
-case 'stages':return tabStages();case 'blog':return tabBlog();case 'price':return tabPrice();case 'contacts':return tabContacts();
+case 'stages':return tabStages();case 'blog':return tabBlog();case 'contacts':return tabContacts();
 case 'socials':return tabSocials();case 'photos':return tabPhotos();case 'pub':return tabPub();return '';}}
 
 function tabMain(){return `
@@ -749,34 +674,6 @@ function tabBlog(){return `
 </div>`;}).join('')}`;}
 function addPost(){C.blog.items.unshift({id:uid(),date:new Date().toISOString().slice(0,10),title:'Новый пост',cover:pic(uid(),1200,750),text:'',images:[],video:''});doSave();admTab(adminTab);}
 
-/* ===== ВКЛАДКА «ЦЕНА» ===== */
-function tabPrice(){return `
-<p class="hint">Оформление текста: <b>пустая строка</b> — новый абзац с отступом · <b>одиночный Enter</b> — перенос строки · строка, начинающаяся с <b>##</b> — золотой подзаголовок · строки, начинающиеся с <b>«- »</b> — маркированный список. Расчёт можно также приложить картинкой (скриншот из Excel или Word) — блок «Картинки с расчётами» в карточке раздела.</p>
-<label class="chk"><input type="checkbox" ${priceOn()?'checked':''} onchange="upd('price.show',this.checked)">Показывать вкладку «Цена» на сайте</label>
- ${f('Заголовок страницы (название вкладки в меню)',inp('price.heading',C.price.heading))}
- ${f('Подводка',ta('price.lead',C.price.lead,2))}
-<div class="f-row" style="margin:10px 0 16px"><button class="mini-btn add" onclick="addPrice()">+ Добавить раздел</button></div>
- ${C.price.items.map((it,i)=>priceCard(it,i)).join('')}`;}
-function priceCard(it,i){
-const p='price.items.'+i;
-return `<div class="item-card">
-<div class="f-row" style="align-items:flex-start">
-<div class="grow">
- ${f('Название раздела',inp(p+'.title',it.title))}
- ${f('Текст расчёта — формулы и пояснения (пустая строка = абзац, ## = подзаголовок, «- » = список)',ta(p+'.text',it.text,10))}
-</div>
-<div class="v-btns">
-<button title="выше" onclick="movePrice(${i},-1)">↑</button>
-<button title="ниже" onclick="movePrice(${i},1)">↓</button>
-<button class="danger" title="удалить" onclick="delPrice(${i})">×</button>
-</div>
-</div>
- ${f('Картинки с расчётами ('+((it.gallery||[]).length)+') — например, скриншот оформленной таблицы из Excel',galleryEditor('price',i))}
-</div>`;}
-function addPrice(){C.price.items.push({id:uid(),title:'Новый раздел',text:'Здесь будет описание этапа и формулы расчёта стоимости.\n\n## Формула расчёта\nСтоимость = S × C × К\n\nЗамените этот текст в панели редактирования.',gallery:[]});doSave();admTab('price');}
-function movePrice(i,d){const a=C.price.items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab('price');}
-function delPrice(i){if(!confirm('Удалить раздел «'+(C.price.items[i].title||'без названия')+'»?'))return;C.price.items.splice(i,1);doSave();admTab('price');}
-
 function tabContacts(){return `
 <p class="hint">Всё здесь — обычный текст, пишите как удобно: адрес, телефон, почта, условия встреч.</p>
  ${f('Заголовок',inp('contacts.heading',C.contacts.heading))}
@@ -811,7 +708,7 @@ if(o&&typeof o==='object'){for(const k in o)walk(o[k],p+'.'+k);}})(C,'');
 return EMB;}
 function fmtKB(n){return n>1048576?(n/1048576).toFixed(2)+' МБ':Math.max(1,Math.round(n/1024))+' КБ';}
 function sectionSizes(){const o={};let tot=0;
-['site','socials','about','price','projects','concepts','stages','blog','contacts'].forEach(k=>{try{o[k]=JSON.stringify(C[k]||'').length;}catch(e){o[k]=0;}tot+=o[k];});
+['site','socials','about','projects','concepts','stages','blog','contacts'].forEach(k=>{try{o[k]=JSON.stringify(C[k]||'').length;}catch(e){o[k]=0;}tot+=o[k];});
 o['ИТОГО']=tot;return o;}
 function countEmbeddedInText(txt){let cnt=0,valid=true;
 try{const j=JSON.parse(txt);(function w(o){if(typeof o==='string'){if(o.startsWith('data:image'))cnt++;return;}if(Array.isArray(o))o.forEach(w);else if(o&&typeof o==='object')for(const k in o)w(o[k]);})(j);}catch(e){valid=false;}
@@ -823,7 +720,7 @@ const r=await fetch('content.json',{cache:'no-store'});
 if(!r.ok){box.innerHTML='<b style="color:#d98a7e">content.json на сайте НЕ НАЙДЕН (ошибка '+r.status+').</b> Именно поэтому у новых посетителей пусто! Файл должен лежать в корне репозитория с именем ровно <b>content.json</b> (без «(1)», без пробелов). Загрузите его и сделайте Commit.';return;}
 const txt=await r.text();
 const res=countEmbeddedInText(txt);
-if(!res.valid){box.innerHTML='<b style="color:#d98a7e">Файл на сайте весит '+fmtKB(txt.length)+', но он ПОВРЕЖДЁН (не читается как JSON).</b> Гости его не получают. Загрузите content.json заново — лучше методом карандаша.';return;}
+if(!res.valid){box.innerHTML='<b style="color:#d98a7e">Файл на сайте весит '+fmtKB(txt.length)+', но он ПОВРЕЖДЁН (не читается как JSON).</b> Гости его не получают. Загрузите content.json заново.';return;}
 if(txt.length>300000){box.innerHTML='Файл на сайте: <b>'+fmtKB(txt.length)+'</b>, вшитых фото: <b>'+res.cnt+'</b>. <b style="color:#d98a7e">Это и тормозит открытие сайта!</b> Нажмите «Открыть файл с сайта в редакторе» — ниже появится список тяжёлых фото, замените их ссылками.';}
 else{box.innerHTML='Файл на сайте: <b>'+fmtKB(txt.length)+'</b>, вшитых фото: <b>'+res.cnt+'</b>. Файл лёгкий — скорость в порядке. ✓';}
 }catch(e){box.innerHTML='<b style="color:#d98a7e">Не удалось скачать content.json с сайта.</b> Проверьте интернет и имя файла на GitHub.';}}
@@ -845,8 +742,6 @@ if(s[3]==='gallery')return sec+' '+nm+' — фото №'+(+s[4]+1);}
 if(s[0]==='blog'){const it=C.blog.items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
 if(s[3]==='cover')return 'Блог '+nm+' — обложка';
 if(s[3]==='images')return 'Блог '+nm+' — фото №'+(+s[4]+1);}
-if(s[0]==='price'){const it=C.price.items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
-if(s[3]==='gallery')return 'Цена '+nm+' — картинка №'+(+s[4]+1);}
 return p;}catch(e){return p;}}
 function tabPhotos(){
 const list=scanEmbedded();
@@ -854,7 +749,7 @@ const sizes=sectionSizes();
 const sizeRows=Object.entries(sizes).map(([k,v])=>'<div class="f-row" style="justify-content:space-between;padding:3px 0"><span>'+esc(k)+'</span><b>'+fmtKB(v)+'</b></div>').join('');
 const diag=`<div class="item-card">
 <h3 style="font-family:var(--serif);font-size:19px;margin-bottom:8px">Диагностика веса</h3>
-<p class="hint" style="margin-top:0">Панель работает с копией в этом браузере, а гости получают файл content.json с GitHub — это два разных экземпляра. Ниже вес копии этого браузера по разделам.</p>
+<p class="hint" style="margin-top:0">Панель работает с копией в этом браузере, а гости получают content.json с GitHub — это два разных экземпляра. Ниже вес копии этого браузера по разделам.</p>
 <div style="max-width:300px">${sizeRows}</div>
 <div class="f-row" style="flex-wrap:wrap;margin-top:12px">
 <button class="mini-btn add" onclick="checkSiteFile()">Проверить файл на сайте</button>
@@ -891,16 +786,15 @@ return `<div class="item-card">
 <ol class="pub-steps">
 <li>Нажмите <b>«Скачать content.json»</b> — в файл сохранятся все ваши правки.</li>
 <li>Откройте репозиторий osade на GitHub → <b>Add file → Upload files</b>.</li>
-<li>Перетащите файл (он заменит старый) → <b>Commit changes</b>.</li>
-<li>Через 1–2 минуты посетители увидят обновление. Если старая версия упорно показывается — обновите страницу с очисткой кэша: <b>Ctrl+Shift+R</b>.</li>
+<li>Перетащите файл (имя должно быть ровно content.json) → прокрутите вниз → <b>Commit changes</b>.</li>
+<li>Через 1–2 минуты посетители увидят обновление. Если старая версия упорно показывается — <b>Ctrl+Shift+R</b>.</li>
 </ol>
 <div class="f-row" style="flex-wrap:wrap;margin:18px 0 6px">
 <button class="mini-btn add" onclick="exportJSON()">↓ Скачать content.json</button>
 <label class="mini-btn">↑ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint"><b>Скорость сайта.</b> Если сайт открывается медленно — откройте вкладку <b>«Фото-файлы»</b>: она покажет вес файла на сайте и найдёт тяжёлые фото, вшитые в content.json. Фото по ссылкам файл не утяжеляют.</p>
-<p class="hint">Видео встраивается по ссылке (YouTube, VK Видео, Rutube) — загружать видеофайлы на сайт не нужно и не получится: они слишком тяжёлые.</p>
+<p class="hint"><b>Скорость сайта.</b> Если сайт открывается медленно — вкладка <b>«Фото-файлы»</b> покажет вес файла на сайте и найдёт тяжёлые фото, вшитые в content.json. Фото по ссылкам файл не утяжеляют.</p>
  ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
 function exportJSON(){
@@ -929,7 +823,6 @@ else if(seg[0]==='concepts'||seg[0]==='concept'){key='portfolio';html=seg[1]?vie
 else if(seg[0]==='stages'){key='stages';html=viewStages();}
 else if(seg[0]==='blog'){key='blog';html=seg[1]?viewPost(seg[1]):viewBlog();}
 else if(seg[0]==='post'){key='blog';html=viewPost(seg[1]);}
-else if(seg[0]==='price'){key='price';html=priceOn()?(seg[1]?viewPriceDetail(seg[1]):viewPriceList()):viewHome();}
 else if(seg[0]==='contacts'){key='contacts';html=viewContacts();}
 else if(seg[0]==='admin'){key='admin';html=viewAdmin();}
 else {html=viewHome();}
@@ -941,7 +834,6 @@ if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
 
 /* ================== СТАРТ ================== */
 (async function(){
-/* битые картинки — прячем, вместо них остаётся аккуратный тёмный фон */
 document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG'){e.target.style.visibility='hidden';}},true);
 await loadContent();
 addEventListener('hashchange',route);
@@ -949,4 +841,4 @@ addEventListener('hashchange',route);
 </script>
 </body>
 </html>
-<!-- OSADE v15 END -->
+<!-- OSADE v16 END -->

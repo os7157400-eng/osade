@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v14 -->
+<!-- OSADE v15 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -244,7 +244,8 @@ header .right .soc{display:none}
 
 <script>
 /* ================== ДЕМО-КОНТЕНТ (всё меняется через Админ) ================== */
-const pic=(s,w=1200,h=900)=>`https://picsum.photos/seed/${s}/${w}/${h}`;
+/* Заглушки-картинки рисуются самим сайтом (SVG) — никаких внешних сервисов, работают всегда и везде */
+const pic=(s,w=1200,h=900)=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#171219"/><rect x="10" y="10" width="${w-20}" height="${h-20}" fill="none" stroke="rgba(200,168,120,.4)"/><text x="${w/2}" y="${h/2}" fill="#c8a878" font-family="Georgia,serif" font-size="${Math.max(20,Math.round(h/16))}" letter-spacing="12" text-anchor="middle" dominant-baseline="middle">OSADE</text></svg>`);
 const DEFAULTS={
 meta:{updatedAt:0},
 site:{
@@ -607,7 +608,7 @@ return `<div class="admin-wrap">
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v14</span>
+<span class="ver-tag">OSADE v15</span>
 <button class="mini-btn add" onclick="exportJSON()">↓ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -801,13 +802,37 @@ return `<p class="hint">Для каждой кнопки: выберите ик�
 function addSoc(){C.socials.push({icon:'max',name:'MAX',url:''});doSave();admTab('socials');}
 function delSoc(i){if(!confirm('Удалить эту кнопку?'))return;C.socials.splice(i,1);doSave();admTab('socials');}
 
-/* ===== ВКЛАДКА «ФОТО-ФАЙЛЫ» ===== */
+/* ===== ВКЛАДКА «ФОТО-ФАЙЛЫ» + ДИАГНОСТИКА ===== */
 let EMB=[];
 function scanEmbedded(){EMB=[];
 (function walk(o,p){if(typeof o==='string'){if(o.startsWith('data:image'))EMB.push({path:p,obj:o});return;}
 if(Array.isArray(o)){o.forEach((v,i)=>walk(v,p+'.'+i));return;}
 if(o&&typeof o==='object'){for(const k in o)walk(o[k],p+'.'+k);}})(C,'');
 return EMB;}
+function fmtKB(n){return n>1048576?(n/1048576).toFixed(2)+' МБ':Math.max(1,Math.round(n/1024))+' КБ';}
+function sectionSizes(){const o={};let tot=0;
+['site','socials','about','price','projects','concepts','stages','blog','contacts'].forEach(k=>{try{o[k]=JSON.stringify(C[k]||'').length;}catch(e){o[k]=0;}tot+=o[k];});
+o['ИТОГО']=tot;return o;}
+function countEmbeddedInText(txt){let cnt=0,valid=true;
+try{const j=JSON.parse(txt);(function w(o){if(typeof o==='string'){if(o.startsWith('data:image'))cnt++;return;}if(Array.isArray(o))o.forEach(w);else if(o&&typeof o==='object')for(const k in o)w(o[k]);})(j);}catch(e){valid=false;}
+return {valid:valid,cnt:cnt};}
+async function checkSiteFile(){const box=document.getElementById('siteFileInfo');if(!box)return;
+box.textContent='Проверяю файл на сайте...';
+try{
+const r=await fetch('content.json',{cache:'no-store'});
+if(!r.ok){box.innerHTML='<b style="color:#d98a7e">content.json на сайте НЕ НАЙДЕН (ошибка '+r.status+').</b> Именно поэтому у новых посетителей пусто! Файл должен лежать в корне репозитория с именем ровно <b>content.json</b> (без «(1)», без пробелов). Загрузите его и сделайте Commit.';return;}
+const txt=await r.text();
+const res=countEmbeddedInText(txt);
+if(!res.valid){box.innerHTML='<b style="color:#d98a7e">Файл на сайте весит '+fmtKB(txt.length)+', но он ПОВРЕЖДЁН (не читается как JSON).</b> Гости его не получают. Загрузите content.json заново — лучше методом карандаша.';return;}
+if(txt.length>300000){box.innerHTML='Файл на сайте: <b>'+fmtKB(txt.length)+'</b>, вшитых фото: <b>'+res.cnt+'</b>. <b style="color:#d98a7e">Это и тормозит открытие сайта!</b> Нажмите «Открыть файл с сайта в редакторе» — ниже появится список тяжёлых фото, замените их ссылками.';}
+else{box.innerHTML='Файл на сайте: <b>'+fmtKB(txt.length)+'</b>, вшитых фото: <b>'+res.cnt+'</b>. Файл лёгкий — скорость в порядке. ✓';}
+}catch(e){box.innerHTML='<b style="color:#d98a7e">Не удалось скачать content.json с сайта.</b> Проверьте интернет и имя файла на GitHub.';}}
+async function loadSiteToEditor(){
+if(!confirm('Правки в этом браузере будут заменены содержимым файла с сайта (content.json на GitHub). Продолжить?'))return;
+try{const r=await fetch('content.json',{cache:'no-store'});if(!r.ok)return toast('Файл на сайте не найден');
+const j=await r.json();
+C=mergeDeep(structuredClone(DEFAULTS),j);doSave();renderChrome();admTab('photos');toast('Файл с сайта открыт в редакторе — можно разгружать');}
+catch(e){toast('Не удалось прочитать content.json с сайта');}}
 function pathLabel(p){try{
 const s=p.split('.').filter(Boolean);
 if(s[0]==='site')return 'Фон главной страницы';
@@ -823,10 +848,23 @@ if(s[3]==='images')return 'Блог '+nm+' — фото №'+(+s[4]+1);}
 if(s[0]==='price'){const it=C.price.items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
 if(s[3]==='gallery')return 'Цена '+nm+' — картинка №'+(+s[4]+1);}
 return p;}catch(e){return p;}}
-function tabPhotos(){const list=scanEmbedded();
-if(!list.length)return '<p class="hint">Встроенных фото не найдено — весь контент лёгкий. Отлично! 👍</p>';
+function tabPhotos(){
+const list=scanEmbedded();
+const sizes=sectionSizes();
+const sizeRows=Object.entries(sizes).map(([k,v])=>'<div class="f-row" style="justify-content:space-between;padding:3px 0"><span>'+esc(k)+'</span><b>'+fmtKB(v)+'</b></div>').join('');
+const diag=`<div class="item-card">
+<h3 style="font-family:var(--serif);font-size:19px;margin-bottom:8px">Диагностика веса</h3>
+<p class="hint" style="margin-top:0">Панель работает с копией в этом браузере, а гости получают файл content.json с GitHub — это два разных экземпляра. Ниже вес копии этого браузера по разделам.</p>
+<div style="max-width:300px">${sizeRows}</div>
+<div class="f-row" style="flex-wrap:wrap;margin-top:12px">
+<button class="mini-btn add" onclick="checkSiteFile()">Проверить файл на сайте</button>
+<button class="mini-btn" onclick="loadSiteToEditor()">Открыть файл с сайта в редакторе</button>
+</div>
+<p class="hint" id="siteFileInfo" style="margin-bottom:0">Нажмите «Проверить файл на сайте» — узнаем, что именно получают гости.</p>
+</div>`;
+if(!list.length)return diag+'<p class="hint">В копии этого браузера вшитых фото нет — она лёгкая. 👍 Если «Проверить файл на сайте» покажет большой вес — нажмите «Открыть файл с сайта в редакторе» и разгрузите его здесь же: список появится ниже.</p>';
 const mb=(list.reduce((a,x)=>a+x.obj.length,0)*0.75/1048576).toFixed(2);
-return `<p class="hint">Найдено <b>${list.length}</b> фото, вшитых в content.json — они утяжеляют сайт примерно на <b>${mb} МБ</b> и замедляют первое открытие. Как разгрузить каждое: <b>↓ Скачать фото</b> → загрузите файл на GitHub (Add file → Upload files; лучше переименуйте осмысленно, например <b>osade-hero.jpg</b>) → его адрес на сайте будет <b>https://osade-arch.ru/имя-файла.jpg</b> (проверьте в новой вкладке) → вставьте адрес в поле и нажмите <b>Заменить ссылкой</b>. Когда список опустеет — скачайте content.json во вкладке «Публикация» и загрузите на GitHub.</p>
+return diag+`<p class="hint">В копии этого браузера найдено <b>${list.length}</b> вшитых фото (~${mb} МБ). Как разгрузить каждое: <b>↓ Скачать фото</b> → загрузите файл на GitHub (Add file → Upload files, в корень; переименуйте осмысленно, например <b>osade-hero.jpg</b>) → адрес файла будет <b>https://osade-arch.ru/имя-файла.jpg</b> (проверьте в новой вкладке) → вставьте адрес в поле и нажмите <b>Заменить ссылкой</b>. Когда список опустеет — «Публикация» → «Скачать content.json» → загрузить на GitHub.</p>
  ${list.map((x,i)=>photoRow(x,i)).join('')}`;}
 function photoRow(x,i){const kb=Math.max(1,Math.round(x.obj.length*0.75/1024));
 return `<div class="item-card"><div class="f-row" style="flex-wrap:wrap;align-items:flex-start">
@@ -861,7 +899,7 @@ return `<div class="item-card">
 <label class="mini-btn">↑ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint"><b>Скорость сайта.</b> Если сайт открывается медленно — откройте вкладку <b>«Фото-файлы»</b>: она найдёт все тяжёлые фото, вшитые в content.json, и поможет заменить их ссылками. Фото по ссылкам не утяжеляют файл.</p>
+<p class="hint"><b>Скорость сайта.</b> Если сайт открывается медленно — откройте вкладку <b>«Фото-файлы»</b>: она покажет вес файла на сайте и найдёт тяжёлые фото, вшитые в content.json. Фото по ссылкам файл не утяжеляют.</p>
 <p class="hint">Видео встраивается по ссылке (YouTube, VK Видео, Rutube) — загружать видеофайлы на сайт не нужно и не получится: они слишком тяжёлые.</p>
  ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
@@ -911,4 +949,4 @@ addEventListener('hashchange',route);
 </script>
 </body>
 </html>
-<!-- OSADE v14 END -->
+<!-- OSADE v15 END -->

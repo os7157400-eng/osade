@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- OSADE v11 -->
+<!-- OSADE v14 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -28,6 +28,13 @@ button{font-family:var(--sans);cursor:pointer;background:none;border:none;color:
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
 .container.narrow{max-width:880px}
 .container.narrow2{max-width:760px}
+
+#veil{position:fixed;inset:0;background:var(--bg);z-index:300;display:grid;place-items:center;transition:opacity .45s}
+#veil.off{opacity:0;pointer-events:none}
+.veil-logo{font-family:var(--serif);font-size:30px;letter-spacing:8px;color:var(--ink);text-align:center}
+.veil-bar{width:120px;height:1px;background:var(--line);margin:18px auto 0;position:relative;overflow:hidden}
+.veil-bar i{position:absolute;top:0;left:-40%;width:40%;height:100%;background:var(--gold);animation:veilSlide 1.1s infinite linear}
+@keyframes veilSlide{to{left:100%}}
 
 header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 4vw;transition:.35s}
 header.solid{background:rgba(13,11,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 4vw}
@@ -101,6 +108,9 @@ nav a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:
 .price-list p{color:var(--muted);font-size:16px;margin-top:6px}
 .price-body{margin-top:30px}
 .price-body p{font-size:18.5px;color:#e8e0d2;margin:0 0 18px}
+.p-h{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--gold);margin:26px 0 10px}
+.p-list{margin:0 0 18px;padding-left:22px}
+.p-list li{font-size:18.5px;color:#e8e0d2;margin-bottom:6px}
 
 .page{padding:150px 0 90px;min-height:60vh}
 .crumb{display:inline-block;margin-bottom:24px;color:var(--muted);font-family:var(--sans);font-size:13px;letter-spacing:.08em}
@@ -215,6 +225,8 @@ header .right .soc{display:none}
 </head>
 <body>
 
+<div id="veil"><div><div class="veil-logo">OSADE</div><div class="veil-bar"><i></i></div></div></div>
+
 <header id="hdr">
 <a class="logo" href="#/"><span id="logoText">OSADE</span></a>
 <nav><ul id="navList"></ul></nav>
@@ -255,8 +267,8 @@ photo:pic('osade-portrait',900,1100),
 text:'Это заготовка текста — замените её на свою.\n\nРасскажите здесь о себе: образование, опыт, любимые проекты и города. Загрузите своё портретное фото (вертикальное, лучше 900×1100) в разделе «Админ → Обо мне».\n\nДобавьте пару строк о вашей эзотерической практике: как вы чувствуете место, как оно подсказывает решения и почему это важно для гостеприимства.'},
 price:{show:true,heading:'Цена',lead:'Прозрачные этапы и понятная стоимость — вы всегда знаете, за что платите.',
 items:[
-{id:'pe1',title:'Эскизный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\nЗамените этот текст в панели редактирования (вкладка «Цена»). Абзацы разделяйте пустой строкой.'},
-{id:'pe2',title:'Концептуальный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\nЗамените этот текст в панели редактирования (вкладка «Цена»). Абзацы разделяйте пустой строкой.'}
+{id:'pe1',title:'Эскизный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\n## Формула расчёта\nСтоимость = S × C × К\nгде S — площадь объекта, м²\n\nЗамените этот текст в панели редактирования (вкладка «Цена»). Пустая строка — новый абзац, строка с ## — подзаголовок, строка с «- » — список.',gallery:[]},
+{id:'pe2',title:'Концептуальный проект',text:'Здесь будет описание этапа и формулы расчёта стоимости по СБЦ.\n\n## Формула расчёта\nСтоимость = S × C × К\nгде S — площадь объекта, м²\n\nЗамените этот текст в панели редактирования (вкладка «Цена»).',gallery:[]}
 ]},
 projects:{heading:'Проекты', lead:'Реализованные и текущие объекты — от бутик-отелей до загородных комплексов.',
 items:[
@@ -278,7 +290,7 @@ stages:{heading:'Этапы работы', lead:'Путь от первой вс
 steps:[
 {title:'Знакомство и бриф', text:'Встречаемся онлайн или лично. Обсуждаем задачу, участок или здание, бюджет и сроки. Я слушаю — много.', img:pic('osade-st1',1200,900)},
 {title:'Энергетика места', text:'Приезжаю на объект, сижу в тишине, смотрю свет, воду, ветер и историю места. Так рождается образ будущего гостеприимства.', img:pic('osade-st2',1200,900)},
-{title:'Концепция и планировки', text:'Готово эскизную идею, зонирование, стилевые коллажи. Мы вместе выбираем направление.', img:pic('osade-st3',1200,900)},
+{title:'Концепция и планировки', text:'Готовлю эскизную идею, зонирование, стилевые коллажи. Мы вместе выбираем направление.', img:pic('osade-st3',1200,900)},
 {title:'Проект и документация', text:'Развиваю концепцию до рабочих чертежей: планировки, ведомости отделки, подбор материалов и света.', img:pic('osade-st4',1200,900)},
 {title:'Реализация и надзор', text:'Сопровождаю стройку и отделку, защищаю детали, наполняю пространство предметами и смыслами. Передаю ключи.', img:pic('osade-st5',1200,900)}
 ]},
@@ -302,7 +314,23 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const isObj=x=>x&&typeof x==='object'&&!Array.isArray(x);
 function mergeDeep(b,o){for(const k in o){if(isObj(o[k])&&isObj(b[k]))mergeDeep(b[k],o[k]);else b[k]=o[k];}return b;}
 function setPath(o,p,v){const ks=p.split('.');let t=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];t=isNaN(k)?t[k]:t[+k];}const l=ks[ks.length-1];if(isNaN(l))t[l]=v;else t[+l]=v;}
-const paras=t=>String(t||'').split(/\n{2,}/).filter(p=>p.trim()).map(p=>'<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>').join('');
+const paras=t=>String(t||'').replace(/\r\n?/g,'\n').split(/\n{2,}/).filter(p=>p.trim()).map(p=>'<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>').join('');
+/* Богатый текст: пустая строка = абзац, ## = подзаголовок, «- » = список, одиночный Enter = перенос */
+function richParas(t){
+const norm=String(t||'').replace(/\r\n?/g,'\n');
+return norm.split(/\n{2,}/).filter(b=>b.trim()).map(block=>{
+const lines=block.split('\n').map(x=>x.trim()).filter(Boolean);
+let out='',listOpen=false,para=[];
+const flush=()=>{if(para.length){out+='<p>'+para.map(esc).join('<br>')+'</p>';para=[];}};
+const closeL=()=>{if(listOpen){out+='</ul>';listOpen=false;}};
+lines.forEach(line=>{
+if(/^##+/.test(line)){flush();closeL();out+='<h3 class="p-h">'+esc(line.replace(/^#+\s*/,''))+'</h3>';}
+else if(/^[-•]\s+/.test(line)){flush();if(!listOpen){out+='<ul class="p-list">';listOpen=true;}out+='<li>'+esc(line.replace(/^[-•]\s+/,''))+'</li>';}
+else{closeL();para.push(line);}
+});
+flush();closeL();
+return out;}).join('');
+}
 function fmtDate(d){try{return new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})}catch(e){return esc(d)}}
 function subHtml(s){return esc(s).split('*').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${x}</span>`).join('<i class="star">✳</i>')}
 let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
@@ -328,16 +356,29 @@ const LS_KEY='osade_content_v1';
 /* ПАРОЛЬ АДМИНИСТРАТОРА. Чтобы сменить: замените текст в кавычках и загрузите обновлённый index.html на GitHub. */
 const PWD='osade2026_olgas78';
 let C=null;
-async function loadContent(){
-let published=null;
-try{const r=await fetch('content.json',{cache:'no-store'});if(r.ok){const j=JSON.parse(await r.text());if(j&&j.site)published=j;}}catch(e){}
-let local=null;try{const ls=JSON.parse(localStorage.getItem(LS_KEY));if(ls&&ls.site)local=ls;}catch(e){}
-let pick=null;
-if(published&&local)pick=((local.meta&&local.meta.updatedAt)||0)>=(published.meta&&published.meta.updatedAt||0)?local:published;
-else pick=local||published;
-C=pick?mergeDeep(structuredClone(DEFAULTS),pick):structuredClone(DEFAULTS);
+function normalizePrice(){
 if(!C.price||!Array.isArray(C.price.items))C.price={show:true,heading:'Цена',lead:'',items:[]};
+C.price.items.forEach(it=>{if(!Array.isArray(it.gallery))it.gallery=[];if(typeof it.text!=='string')it.text='';if(typeof it.title!=='string')it.title='';});
 }
+function applyContent(data){C=data;normalizePrice();renderChrome();route();
+if((location.hash||'').startsWith('#/admin')&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);}
+async function loadContent(){
+/* 1) мгновенная отрисовка из памяти браузера или заготовок — чёрного экрана больше нет */
+let local=null;try{const ls=JSON.parse(localStorage.getItem(LS_KEY));if(ls&&ls.site)local=ls;}catch(e){}
+applyContent(local?mergeDeep(structuredClone(DEFAULTS),local):structuredClone(DEFAULTS));
+/* 2) заставка убирается максимум через 2.5с, даже если интернет медленный */
+const cap=setTimeout(hideVeil,2500);
+/* 3) в фоне тихо догружаем опубликованный контент и подменяем, если он новее */
+try{
+const r=await fetch('content.json');
+if(r.ok){const j=JSON.parse(await r.text());
+if(j&&j.site&&((j.meta&&j.meta.updatedAt)||0)>((local&&local.meta&&local.meta.updatedAt)||0)){
+applyContent(mergeDeep(structuredClone(DEFAULTS),j));
+}}
+}catch(e){}
+clearTimeout(cap);hideVeil();
+}
+function hideVeil(){const v=$('#veil');if(v&&!v.classList.contains('off')){v.classList.add('off');setTimeout(()=>v.remove(),500);}}
 let saveT;
 function scheduleSave(){clearTimeout(saveT);saveT=setTimeout(doSave,400);}
 function doSave(){
@@ -503,7 +544,7 @@ function viewContacts(){return `
 </div></section>`;}
 
 /* ===== СТРАНИЦЫ «ЦЕНА» ===== */
-function pricePreview(t){const s=String(t||'').split('\n').map(x=>x.trim()).filter(Boolean)[0]||'';return s.length>150?s.slice(0,150)+'…':s;}
+function pricePreview(t){const s=String(t||'').replace(/\r/g,'').split('\n').map(x=>x.trim()).filter(x=>x&&!/^##/.test(x)&&!/^[-•]\s/.test(x))[0]||'';return s.length>150?s.slice(0,150)+'…':s;}
 function viewPriceList(){return `
 <section class="page"><div class="container">
 <div class="overline">Стоимость услуг</div>
@@ -518,11 +559,13 @@ if(!priceOn())return viewHome();
 const it=C.price.items.find(x=>x.id===id);
 if(!it)return viewPriceList();
 const others=C.price.items.filter(x=>x.id!==it.id);
+const gal=it.gallery||[];
 return `<section class="page"><div class="container narrow2">
 <a class="crumb" href="#/price">← ${esc(C.price.heading||'Цена')}</a>
 <div class="overline">Стоимость услуг</div>
 <h1 class="sec-title">${esc(it.title)}</h1>
-<div class="price-body">${paras(it.text)}</div>
+<div class="price-body">${richParas(it.text)}</div>
+ ${gal.length?`<div class="post-imgs">${gal.map((u,j)=>`<img loading="lazy" src="${esc(u)}" onclick="openLB(C.price.items.find(x=>x.id==='${it.id}').gallery,${j})" alt="${esc(it.title)}">`).join('')}</div>`:''}
  ${others.length?`<div class="others"><div class="overline">Смотрите также</div><div class="price-list">${others.map(o=>`<a href="#/price/${o.id}"><h3>${esc(o.title)}</h3></a>`).join('')}</div></div>`:''}
 </div></section>`;}
 
@@ -539,7 +582,7 @@ function closeLB(){$('#modalRoot').innerHTML='';}
 document.addEventListener('keydown',e=>{if($('#modalRoot').innerHTML){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1);}});
 
 /* ================== АДМИНКА ================== */
-const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'price',t:'Цена'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'pub',t:'Публикация'}];
+const TABS=[{k:'main',t:'Главная'},{k:'about',t:'Обо мне'},{k:'portfolio',t:'Портфолио'},{k:'stages',t:'Этапы'},{k:'blog',t:'Блог'},{k:'price',t:'Цена'},{k:'contacts',t:'Контакты'},{k:'socials',t:'Мессенджеры'},{k:'photos',t:'Фото-файлы'},{k:'pub',t:'Публикация'}];
 let adminTab='main',portKind='projects';
 const f=(l,c)=>`<div class="f-label">${l}</div>${c}`;
 const inp=(p,v,ph)=>`<input class="inp" value="${esc(v)}" placeholder="${esc(ph||'')}" oninput="upd('${p}',this.value)">`;
@@ -564,7 +607,7 @@ return `<div class="admin-wrap">
 <div>
 <div class="adm-top"><span class="hint" id="saveState" style="margin:0"></span>
 <div class="f-row" style="flex-wrap:wrap">
-<span class="ver-tag">OSADE v11</span>
+<span class="ver-tag">OSADE v14</span>
 <button class="mini-btn add" onclick="exportJSON()">↓ content.json</button>
 <a class="mini-btn" href="#/">На сайт ↗</a>
 <button class="mini-btn danger" onclick="admLogout()">Выйти</button>
@@ -579,7 +622,7 @@ const b=$('#admBody');if(b)b.innerHTML=renderTab(t);}
 function renderTab(t){switch(t){
 case 'main':return tabMain();case 'about':return tabAbout();case 'portfolio':return tabPortfolio();
 case 'stages':return tabStages();case 'blog':return tabBlog();case 'price':return tabPrice();case 'contacts':return tabContacts();
-case 'socials':return tabSocials();case 'pub':return tabPub();return '';}}
+case 'socials':return tabSocials();case 'photos':return tabPhotos();case 'pub':return tabPub();return '';}}
 
 function tabMain(){return `
  ${f('Текст логотипа (в левом верхнем углу)',inp('site.logoText',C.site.logoText))}
@@ -645,7 +688,7 @@ return `<div class="g-grid">${items||'<span class="hint">Пока пусто</sp
 <button class="mini-btn" onclick="galAddUrl('${list}',${i})">+ по ссылке</button>
 <label class="mini-btn">+ загрузить файл<input type="file" accept="image/*" hidden onchange="galAddFile('${list}',${i},this)"></label>
 </div>`;}
-function galArr(list,i){return list==='blog'?C.blog.items[i].images:C[list].items[i].gallery;}
+function galArr(list,i){if(list==='blog')return C.blog.items[i].images=C.blog.items[i].images||[];const it=C[list].items[i];return it.gallery=it.gallery||[];}
 function galMove(list,i,j,d){const a=galArr(list,i),k=j+d;if(k<0||k>=a.length)return;[a[j],a[k]]=[a[k],a[j]];doSave();admTab(adminTab);}
 function galDel(list,i,j){if(!confirm('Удалить фото?'))return;galArr(list,i).splice(j,1);doSave();admTab(adminTab);}
 function galAddUrl(list,i){const el=document.getElementById('gurl-'+list+'-'+i);const u=(el.value||'').trim();
@@ -707,7 +750,7 @@ function addPost(){C.blog.items.unshift({id:uid(),date:new Date().toISOString().
 
 /* ===== ВКЛАДКА «ЦЕНА» ===== */
 function tabPrice(){return `
-<p class="hint">Раздел «Цена» — список услуг: клик по названию открывает отдельную страницу с расчётом. Абзацы разделяйте пустой строкой.</p>
+<p class="hint">Оформление текста: <b>пустая строка</b> — новый абзац с отступом · <b>одиночный Enter</b> — перенос строки · строка, начинающаяся с <b>##</b> — золотой подзаголовок · строки, начинающиеся с <b>«- »</b> — маркированный список. Расчёт можно также приложить картинкой (скриншот из Excel или Word) — блок «Картинки с расчётами» в карточке раздела.</p>
 <label class="chk"><input type="checkbox" ${priceOn()?'checked':''} onchange="upd('price.show',this.checked)">Показывать вкладку «Цена» на сайте</label>
  ${f('Заголовок страницы (название вкладки в меню)',inp('price.heading',C.price.heading))}
  ${f('Подводка',ta('price.lead',C.price.lead,2))}
@@ -719,15 +762,17 @@ return `<div class="item-card">
 <div class="f-row" style="align-items:flex-start">
 <div class="grow">
  ${f('Название раздела',inp(p+'.title',it.title))}
- ${f('Текст расчёта — формулы и пояснения (абзацы через пустую строку)',ta(p+'.text',it.text,8))}
+ ${f('Текст расчёта — формулы и пояснения (пустая строка = абзац, ## = подзаголовок, «- » = список)',ta(p+'.text',it.text,10))}
 </div>
 <div class="v-btns">
 <button title="выше" onclick="movePrice(${i},-1)">↑</button>
 <button title="ниже" onclick="movePrice(${i},1)">↓</button>
 <button class="danger" title="удалить" onclick="delPrice(${i})">×</button>
 </div>
-</div></div>`;}
-function addPrice(){C.price.items.push({id:uid(),title:'Новый раздел',text:'Здесь будет описание этапа и формулы расчёта стоимости.\n\nЗамените этот текст в панели редактирования.'});doSave();admTab('price');}
+</div>
+ ${f('Картинки с расчётами ('+((it.gallery||[]).length)+') — например, скриншот оформленной таблицы из Excel',galleryEditor('price',i))}
+</div>`;}
+function addPrice(){C.price.items.push({id:uid(),title:'Новый раздел',text:'Здесь будет описание этапа и формулы расчёта стоимости.\n\n## Формула расчёта\nСтоимость = S × C × К\n\nЗамените этот текст в панели редактирования.',gallery:[]});doSave();admTab('price');}
 function movePrice(i,d){const a=C.price.items,k=i+d;if(k<0||k>=a.length)return;[a[i],a[k]]=[a[k],a[i]];doSave();admTab('price');}
 function delPrice(i){if(!confirm('Удалить раздел «'+(C.price.items[i].title||'без названия')+'»?'))return;C.price.items.splice(i,1);doSave();admTab('price');}
 
@@ -756,6 +801,52 @@ return `<p class="hint">Для каждой кнопки: выберите ик�
 function addSoc(){C.socials.push({icon:'max',name:'MAX',url:''});doSave();admTab('socials');}
 function delSoc(i){if(!confirm('Удалить эту кнопку?'))return;C.socials.splice(i,1);doSave();admTab('socials');}
 
+/* ===== ВКЛАДКА «ФОТО-ФАЙЛЫ» ===== */
+let EMB=[];
+function scanEmbedded(){EMB=[];
+(function walk(o,p){if(typeof o==='string'){if(o.startsWith('data:image'))EMB.push({path:p,obj:o});return;}
+if(Array.isArray(o)){o.forEach((v,i)=>walk(v,p+'.'+i));return;}
+if(o&&typeof o==='object'){for(const k in o)walk(o[k],p+'.'+k);}})(C,'');
+return EMB;}
+function pathLabel(p){try{
+const s=p.split('.').filter(Boolean);
+if(s[0]==='site')return 'Фон главной страницы';
+if(s[0]==='about')return 'Портрет на странице «Обо мне»';
+if(s[0]==='stages')return 'Этапы → «'+C.stages.steps[+s[2]].title+'» — фото';
+if(s[0]==='projects'||s[0]==='concepts'){const sec=s[0]==='projects'?'Проекты':'Концепции';
+const it=C[s[0]].items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
+if(s[3]==='cover')return sec+' '+nm+' — обложка';
+if(s[3]==='gallery')return sec+' '+nm+' — фото №'+(+s[4]+1);}
+if(s[0]==='blog'){const it=C.blog.items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
+if(s[3]==='cover')return 'Блог '+nm+' — обложка';
+if(s[3]==='images')return 'Блог '+nm+' — фото №'+(+s[4]+1);}
+if(s[0]==='price'){const it=C.price.items[+s[2]];const nm=it&&it.title?'«'+it.title+'»':'';
+if(s[3]==='gallery')return 'Цена '+nm+' — картинка №'+(+s[4]+1);}
+return p;}catch(e){return p;}}
+function tabPhotos(){const list=scanEmbedded();
+if(!list.length)return '<p class="hint">Встроенных фото не найдено — весь контент лёгкий. Отлично! 👍</p>';
+const mb=(list.reduce((a,x)=>a+x.obj.length,0)*0.75/1048576).toFixed(2);
+return `<p class="hint">Найдено <b>${list.length}</b> фото, вшитых в content.json — они утяжеляют сайт примерно на <b>${mb} МБ</b> и замедляют первое открытие. Как разгрузить каждое: <b>↓ Скачать фото</b> → загрузите файл на GitHub (Add file → Upload files; лучше переименуйте осмысленно, например <b>osade-hero.jpg</b>) → его адрес на сайте будет <b>https://osade-arch.ru/имя-файла.jpg</b> (проверьте в новой вкладке) → вставьте адрес в поле и нажмите <b>Заменить ссылкой</b>. Когда список опустеет — скачайте content.json во вкладке «Публикация» и загрузите на GitHub.</p>
+ ${list.map((x,i)=>photoRow(x,i)).join('')}`;}
+function photoRow(x,i){const kb=Math.max(1,Math.round(x.obj.length*0.75/1024));
+return `<div class="item-card"><div class="f-row" style="flex-wrap:wrap;align-items:flex-start">
+<img class="thumb" style="width:110px;height:80px" src="${x.obj}" alt="">
+<div class="grow">
+<div style="font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:6px">${esc(pathLabel(x.path))} · ~${kb} КБ</div>
+<div class="f-row" style="flex-wrap:wrap">
+<button class="mini-btn" onclick="downloadPhoto(${i})">↓ Скачать фото</button>
+<input class="inp" style="flex:1;min-width:220px" id="phurl-${i}" placeholder="https://osade-arch.ru/имя-файла.jpg">
+<button class="mini-btn add" onclick="replacePhoto(${i})">Заменить ссылкой</button>
+</div></div></div></div>`;}
+function downloadPhoto(i){const x=EMB[i];if(!x)return;
+const a=document.createElement('a');a.href=x.obj;a.download='osade-photo-'+(i+1)+'.jpg';
+document.body.appendChild(a);a.click();a.remove();
+toast('Фото скачано. Загрузите его на GitHub и вставьте сюда ссылку.');}
+function replacePhoto(i){const x=EMB[i];if(!x)return;
+const el=document.getElementById('phurl-'+i);const u=(el.value||'').trim();
+if(!/^https:\/\//.test(u))return toast('Вставьте ссылку вида https://osade-arch.ru/...jpg');
+setPath(C,x.path,u);doSave();admTab('photos');toast('Заменено! В конце разгрузите content.json во вкладке «Публикация».');}
+
 function tabPub(){const d=C.meta&&C.meta.exportedAt?new Date(C.meta.exportedAt).toLocaleString('ru-RU'):null;
 return `<div class="item-card">
 <h3 style="font-family:var(--serif);font-size:21px;margin-bottom:12px">Как опубликовать правки на сайте</h3>
@@ -763,14 +854,14 @@ return `<div class="item-card">
 <li>Нажмите <b>«Скачать content.json»</b> — в файл сохранятся все ваши правки.</li>
 <li>Откройте репозиторий osade на GitHub → <b>Add file → Upload files</b>.</li>
 <li>Перетащите файл (он заменит старый) → <b>Commit changes</b>.</li>
-<li>Через 1–2 минуты посетители увидят обновление на osade-arch.ru.</li>
+<li>Через 1–2 минуты посетители увидят обновление. Если старая версия упорно показывается — обновите страницу с очисткой кэша: <b>Ctrl+Shift+R</b>.</li>
 </ol>
 <div class="f-row" style="flex-wrap:wrap;margin:18px 0 6px">
 <button class="mini-btn add" onclick="exportJSON()">↓ Скачать content.json</button>
 <label class="mini-btn">↑ Загрузить backup<input type="file" accept=".json,application/json" hidden onchange="importJSON(this)"></label>
 <button class="mini-btn danger" onclick="resetAll()">Сбросить к демо-контенту</button>
 </div>
-<p class="hint">Фото, загруженные кнопкой «Загрузить файл», вшиваются внутрь content.json без имени файла. Чтобы картинки попадали в поиск, важные обложки лучше загружать в GitHub с осмысленным именем и добавлять кнопкой «+ по ссылке».</p>
+<p class="hint"><b>Скорость сайта.</b> Если сайт открывается медленно — откройте вкладку <b>«Фото-файлы»</b>: она найдёт все тяжёлые фото, вшитые в content.json, и поможет заменить их ссылками. Фото по ссылкам не утяжеляют файл.</p>
 <p class="hint">Видео встраивается по ссылке (YouTube, VK Видео, Rutube) — загружать видеофайлы на сайт не нужно и не получится: они слишком тяжёлые.</p>
  ${d?`<p class="hint">Последний экспорт: ${d}</p>`:''}
 </div>`;}
@@ -815,11 +906,9 @@ if(seg[0]==='admin'&&sessionStorage.getItem('osadeAuth'))admTab(adminTab);
 /* битые картинки — прячем, вместо них остаётся аккуратный тёмный фон */
 document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG'){e.target.style.visibility='hidden';}},true);
 await loadContent();
-renderChrome();
-route();
 addEventListener('hashchange',route);
 })();
 </script>
 </body>
 </html>
-<!-- OSADE v11 END -->
+<!-- OSADE v14 END -->

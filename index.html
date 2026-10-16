@@ -294,7 +294,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&g
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const isObj=x=>x&&typeof x==='object'&&!Array.isArray(x);
 function mergeDeep(b,o){for(const k in o){if(isObj(o[k])&&isObj(b[k]))mergeDeep(b[k],o[k]);else b[k]=o[k];}return b;}
-function setPath(o,p,v){const ks=p.split('.');let t=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];t=isNaN(k)?t[k]:t[+k];}const l=ks[ks.length-1];if(isNaN(l))t[l]=v;else t[+l]=v;}
+function setPath(o,p,v){const ks=p.split('.').filter(Boolean);let t=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];t=isNaN(k)?t[k]:t[+k];}const l=ks[ks.length-1];if(isNaN(l))t[l]=v;else t[+l]=v;}
 const paras=t=>String(t||'').replace(/\r\n?/g,'\n').split(/\n{2,}/).filter(p=>p.trim()).map(p=>'<p>'+esc(p.trim()).replace(/\n/g,'<br>')+'</p>').join('');
 function fmtDate(d){try{return new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})}catch(e){return esc(d)}}
 function subHtml(s){return esc(s).split('*').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${x}</span>`).join('<i class="star">✳</i>')}
